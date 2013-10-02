@@ -10,6 +10,9 @@
 		AB597A0617F6326B00970F95 /* GTFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB597A0517F6326B00970F95 /* GTFormViewController.m */; };
 		AB597A0917F6436500970F95 /* GTData.m in Sources */ = {isa = PBXBuildFile; fileRef = AB597A0817F6436500970F95 /* GTData.m */; };
 		AB597A0C17F646CC00970F95 /* GTDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB597A0B17F646CC00970F95 /* GTDataController.m */; };
+		ABA8BCB217FB687400245158 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA8BCB117FB687400245158 /* CoreData.framework */; };
+		ABA8BCB517FB68FE00245158 /* GTDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA8BCB417FB68FE00245158 /* GTDataManager.m */; };
+		ABA8BCB817FB98C100245158 /* GeoTagger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABA8BCB617FB98C100245158 /* GeoTagger.xcdatamodeld */; };
 		ABD0461517F513CD00C0B201 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD0461417F513CD00C0B201 /* Foundation.framework */; };
 		ABD0461717F513CD00C0B201 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD0461617F513CD00C0B201 /* CoreGraphics.framework */; };
 		ABD0461917F513CD00C0B201 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD0461817F513CD00C0B201 /* UIKit.framework */; };
@@ -47,6 +50,10 @@
 		AB597A0817F6436500970F95 /* GTData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTData.m; sourceTree = "<group>"; };
 		AB597A0A17F646CC00970F95 /* GTDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDataController.h; sourceTree = "<group>"; };
 		AB597A0B17F646CC00970F95 /* GTDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDataController.m; sourceTree = "<group>"; };
+		ABA8BCB117FB687400245158 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		ABA8BCB317FB68FE00245158 /* GTDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDataManager.h; sourceTree = "<group>"; };
+		ABA8BCB417FB68FE00245158 /* GTDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDataManager.m; sourceTree = "<group>"; };
+		ABA8BCB717FB98C100245158 /* GeoTagger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GeoTagger.xcdatamodel; sourceTree = "<group>"; };
 		ABD0461117F513CD00C0B201 /* GeoTagger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoTagger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD0461417F513CD00C0B201 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ABD0461617F513CD00C0B201 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -79,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABA8BCB217FB687400245158 /* CoreData.framework in Frameworks */,
 				ABD0464C17F513F000C0B201 /* MapKit.framework in Frameworks */,
 				ABD0464A17F513E500C0B201 /* CoreLocation.framework in Frameworks */,
 				ABD0461717F513CD00C0B201 /* CoreGraphics.framework in Frameworks */,
@@ -122,6 +130,7 @@
 		ABD0461317F513CD00C0B201 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ABA8BCB117FB687400245158 /* CoreData.framework */,
 				ABD0464B17F513F000C0B201 /* MapKit.framework */,
 				ABD0464917F513E500C0B201 /* CoreLocation.framework */,
 				ABD0461417F513CD00C0B201 /* Foundation.framework */,
@@ -143,15 +152,18 @@
 				AB597A0817F6436500970F95 /* GTData.m */,
 				AB597A0A17F646CC00970F95 /* GTDataController.h */,
 				AB597A0B17F646CC00970F95 /* GTDataController.m */,
-				AB597A0417F6326B00970F95 /* GTFormViewController.h */,
-				AB597A0517F6326B00970F95 /* GTFormViewController.m */,
+				ABA8BCB317FB68FE00245158 /* GTDataManager.h */,
+				ABA8BCB417FB68FE00245158 /* GTDataManager.m */,
 				ABEB4F7E17F94ECF00DE0209 /* GTDetailViewController.h */,
 				ABEB4F7F17F94ECF00DE0209 /* GTDetailViewController.m */,
+				AB597A0417F6326B00970F95 /* GTFormViewController.h */,
+				AB597A0517F6326B00970F95 /* GTFormViewController.m */,
 				ABD0469117F5244700C0B201 /* GTMapPoint.h */,
 				ABD0469217F5244700C0B201 /* GTMapPoint.m */,
 				ABD0462C17F513CD00C0B201 /* Images.xcassets */,
 				ABD0462617F513CD00C0B201 /* Main.storyboard */,
 				ABD0461B17F513CD00C0B201 /* Supporting Files */,
+				ABA8BCB617FB98C100245158 /* GeoTagger.xcdatamodeld */,
 			);
 			path = GeoTagger;
 			sourceTree = "<group>";
@@ -288,7 +300,9 @@
 				ABD0462B17F513CD00C0B201 /* GeoTaggerViewController.m in Sources */,
 				ABD0462517F513CD00C0B201 /* GeoTaggerAppDelegate.m in Sources */,
 				ABD0469317F5244700C0B201 /* GTMapPoint.m in Sources */,
+				ABA8BCB517FB68FE00245158 /* GTDataManager.m in Sources */,
 				AB597A0617F6326B00970F95 /* GTFormViewController.m in Sources */,
+				ABA8BCB817FB98C100245158 /* GeoTagger.xcdatamodeld in Sources */,
 				ABD0462117F513CD00C0B201 /* main.m in Sources */,
 				AB597A0C17F646CC00970F95 /* GTDataController.m in Sources */,
 			);
@@ -511,6 +525,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		ABA8BCB617FB98C100245158 /* GeoTagger.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				ABA8BCB717FB98C100245158 /* GeoTagger.xcdatamodel */,
+			);
+			currentVersion = ABA8BCB717FB98C100245158 /* GeoTagger.xcdatamodel */;
+			path = GeoTagger.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = ABD0460917F513CD00C0B201 /* Project object */;
 }
