@@ -11,10 +11,12 @@
 
 @interface GTDataManager : NSObject
 
++ (GTDataManager *)getInstance;
+
 - (NSManagedObjectContext *)managedObjectContext;
 
 - (NSMutableArray *)getAllLocations;
 
-- (void)saveLocation:(GTData *)location;
+- (NSManagedObject *)saveDesc:(NSString *)desc withLat:(double)latitude withLon:(double)longitude withCreatedTime:(NSDate *)date;
 
 @end

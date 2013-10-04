@@ -11,20 +11,10 @@
 
 @implementation GTDetailViewController
 
-- (void)setData:(GTData *) newData
-{
-    if (_data != newData)
-    {
-        _data = newData;
-        
-        // update the view
-        [self configureView];
-    }
-}
 
 - (void)configureView
 {
-    GTData *theData = self.data;
+    NSManagedObject *location = self.location;
     
     static NSDateFormatter *formatter = nil;
     
@@ -34,14 +24,19 @@
         [formatter setDateStyle:NSDateFormatterMediumStyle];
     }
     
-    if (theData)
+    if (location)
     {
-        NSString *desc = [theData desc];
-        self.descLabel.text = [theData desc];
-        self.latLabel.text = [NSString stringWithFormat:@"%.6f", theData.latitude];
-        self.longLabel.text = [NSString stringWithFormat:@"%.6f", theData.longitude];;
+        self.descLabel.text = [location valueForKey:@"desc"];
+        // One way to convert double id to string
+        self.latLabel.text = [[location valueForKey:@"latitude"] description];
+        // The other way to convert double id to string
+        self.longLabel.text = [NSString stringWithFormat:@"%@",[location valueForKey:@"longitude"]];
+        //NSLog(@"created is: %@", [[location valueForKey:@"created"] description]);
+        self.createdLabel.text = [[location valueForKey:@"created"] description];
     }
 }
+
+
 
 - (void)viewDidLoad
 {

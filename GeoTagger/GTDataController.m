@@ -16,8 +16,6 @@
 {
     // Return the index number of the inserted data.
     
-    GTDataManager *dataManager = [[GTDataManager alloc] init];
-    [dataManager saveLocation:data];
     
     if (self.dataCollection)
     {

@@ -81,7 +81,6 @@
        didFailWithError:(NSError *)error
 {
     NSLog(@"Could not find location: %@", error);
-    
 }
 
 - (void)dealloc
@@ -146,30 +145,32 @@
 {
     if ([[segue identifier] isEqualToString:@"ReturnInput"])
     {
+
         GTFormViewController *formController = [segue sourceViewController];
-        if (formController.gtData)
+        NSManagedObject *currLocation = formController.currLocation;
+        if (currLocation)
         {
-            GTData *data = [formController gtData];
-            NSLog(@"gtData is: %@  %f  %f %@", [data desc], [data latitude], [data longitude], [data created]);
-            NSUInteger index = [self.dataController addFormData:formController.gtData];
-            
             // Create an annotation on a map.
-            CLLocationCoordinate2D coord = formController.location.coordinate;
-            GTMapPoint *mp = [[GTMapPoint alloc] initWithCoordinate:coord
-                                                              title:[data desc]
-                                                              indexNum:index];
+            CLLocationCoordinate2D point= CLLocationCoordinate2DMake([[currLocation valueForKey:@"latitude"] doubleValue],[[currLocation valueForKey:@"longitude"] doubleValue]);
+
+            GTMapPoint *mp = [[GTMapPoint alloc] initWithCoordinate:point
+                                                              title:[currLocation valueForKey:@"desc"]
+                                                           indexNum:1];
             // Add the annotation to the map
             [worldView addAnnotation:mp];
             // Zoom the region to this location
-            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coord, 3000, 3000);
+            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(point, 3000, 3000);
             [worldView setRegion:region animated:YES];
             // Start updating location
             [locationManager startUpdatingLocation];
-            
         }
+        
         
     }
 }
+
+
+
 
 - (IBAction)cancel:(UIStoryboardSegue *)segue
 {
@@ -208,7 +209,6 @@
         GTDetailViewController *detailController = [segue destinationViewController];
         GTData *currData = [self.dataController.dataCollection objectAtIndex:self.currDataIndex];
         [detailController setData:currData];
-        
     }
 }
 
@@ -247,7 +247,7 @@
         {
             // If an existing pin view was not available, create one.
             pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
-                                                       reuseIdentifier:@"CustomPinAnnotation"];
+                                                      reuseIdentifier:@"CustomPinAnnotation"];
             pinView.pinColor = MKPinAnnotationColorRed;
             pinView.animatesDrop = YES;
             pinView.canShowCallout = YES;

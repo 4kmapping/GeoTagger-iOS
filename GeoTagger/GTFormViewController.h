@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *descInput;
 @property (strong, nonatomic) GTData *gtData;
+@property (strong, nonatomic) NSManagedObject *currLocation;
 @property (nonatomic, copy) CLLocation *location;
 
 @end

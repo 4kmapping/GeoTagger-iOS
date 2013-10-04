@@ -32,7 +32,6 @@
            fromLocation:(CLLocation *)oldLocation;
 
 - (void)findLocation;
-- (void)foundLocation:(CLLocation *)location;
 
 // unwind actions for form view controller
 - (IBAction)done:(UIStoryboardSegue *)segue;

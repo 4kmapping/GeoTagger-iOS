@@ -12,6 +12,21 @@
 @implementation GTDataManager
 
 
++ (GTDataManager *)getInstance
+{
+    static GTDataManager *singletonInstance = nil;
+    @synchronized(self)
+    {
+        if(singletonInstance == nil)
+        {
+            singletonInstance = [[self alloc] init];
+        }
+    }
+    
+    return singletonInstance;
+    
+}
+
 - (NSManagedObjectContext *)managedObjectContext
 {
     NSManagedObjectContext *context = nil;
@@ -31,7 +46,7 @@
     
     NSMutableArray * locations = [[managedContext executeFetchRequest:fetchRequest error:&e] mutableCopy];
     
-    if(locations) // error occured.
+    if(!locations) // error occured.
     {
         NSLog(@"Can't fetch location data, %@, %@", e, [e localizedDescription]);
     }
@@ -39,16 +54,17 @@
     return locations;
 }
 
-- (void)saveLocation:(GTData *)location
+
+- (NSManagedObject *)saveDesc:(NSString *)desc withLat:(double)latitude withLon:(double)longitude withCreatedTime:(NSDate *)date
 {
     NSManagedObjectContext *context = [self managedObjectContext];
     // Create a new managed object
     NSManagedObject *newLocation = [NSEntityDescription insertNewObjectForEntityForName:@"Location"
                                                                inManagedObjectContext:context];
-    [newLocation setValue:[location desc] forKey:@"desc"];
-    [newLocation setValue:[NSNumber numberWithDouble:location.latitude] forKey:@"latitude"];
-    [newLocation setValue:[NSNumber numberWithDouble:location.longitude] forKey:@"longitude"];
-    [newLocation setValue:[location created] forKey:@"created"];
+    [newLocation setValue:desc forKey:@"desc"];
+    [newLocation setValue:[NSNumber numberWithDouble:latitude] forKey:@"latitude"];
+    [newLocation setValue:[NSNumber numberWithDouble:longitude] forKey:@"longitude"];
+    [newLocation setValue:date forKey:@"created"];
     
     NSError *error = nil;
     // Save the object to persistent store.
@@ -56,6 +72,8 @@
     {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
+    
+    return newLocation;
 
 }
 
