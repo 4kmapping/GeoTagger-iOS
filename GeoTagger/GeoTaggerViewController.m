@@ -12,6 +12,7 @@
 #import "GTDataController.h"
 #import "GTDetailViewController.h"
 #import "GTData.h"
+#import "GTDataManager.h"
 
 @interface GeoTaggerViewController ()
 
@@ -147,14 +148,15 @@
     {
 
         GTFormViewController *formController = [segue sourceViewController];
-        NSManagedObject *currLocation = formController.currLocation;
-        if (currLocation)
+        self.currLocation = formController.currLocation;
+        if (self.currLocation)
         {
             // Create an annotation on a map.
-            CLLocationCoordinate2D point= CLLocationCoordinate2DMake([[currLocation valueForKey:@"latitude"] doubleValue],[[currLocation valueForKey:@"longitude"] doubleValue]);
+            CLLocationCoordinate2D point= CLLocationCoordinate2DMake([[self.currLocation valueForKey:@"latitude"]
+                                                                      doubleValue],[[self.currLocation valueForKey:@"longitude"] doubleValue]);
 
             GTMapPoint *mp = [[GTMapPoint alloc] initWithCoordinate:point
-                                                              title:[currLocation valueForKey:@"desc"]
+                                                              title:[self.currLocation valueForKey:@"desc"]
                                                            indexNum:1];
             // Add the annotation to the map
             [worldView addAnnotation:mp];
@@ -162,14 +164,12 @@
             MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(point, 3000, 3000);
             [worldView setRegion:region animated:YES];
             // Start updating location
-            [locationManager startUpdatingLocation];
+            //[locationManager startUpdatingLocation];
         }
         
         
     }
 }
-
-
 
 
 - (IBAction)cancel:(UIStoryboardSegue *)segue
@@ -179,6 +179,7 @@
         [self dismissViewControllerAnimated:YES completion:NULL];
     }
 }
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -194,9 +195,9 @@
         GTFormViewController *formController = [navController.viewControllers objectAtIndex:0];
         // Register location into destination view controller
         
-        //CLLocation *location = [[worldView userLocation] location];
         CLLocation *currLoc = [locationManager location];
         
+        // Initialize for an initial map view.
         if (!currLoc)
         {
             currLoc = [[CLLocation alloc] initWithLatitude:20.22 longitude:120.33];
@@ -207,23 +208,9 @@
     if ([[segue identifier] isEqualToString:@"DetailViewSegue"])
     {
         GTDetailViewController *detailController = [segue destinationViewController];
-        GTData *currData = [self.dataController.dataCollection objectAtIndex:self.currDataIndex];
-        [detailController setData:currData];
+        [detailController setLocation:self.currLocation];
     }
 }
-
-
-/*
-    For showing annotations.
-
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id < MKAnnotation >)annotation
-{
-    MKAnnotationView *aView = [[[MKAnnotationView alloc] initWithAnnotation:annotation
-                                                            reuseIdentifier:@"MyAnnotatonView"]];
-    aView.centerOffset = CGPointMake(10,-20);
-}
-*/
-
 
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView
@@ -235,10 +222,7 @@
     
     // Handle any custom annotations.
     if ([annotation isKindOfClass:[GTMapPoint class]])
-    {
-        // Set the annotation as the current data.
-        [self setCurrDataIndex:[(GTMapPoint *)annotation indexNum]];
-        
+    {        
         // Try to dequeue an existing pin view first.
         MKPinAnnotationView *pinView = (MKPinAnnotationView*)[mapView
             dequeueReusableAnnotationViewWithIdentifier:@"CustomPinAnnotationView"];
@@ -267,7 +251,9 @@
 }
 
 
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view
+    calloutAccessoryControlTapped:(UIControl *)control
+{
     // Go to detail view
     /*
     ViewController *detailViewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];

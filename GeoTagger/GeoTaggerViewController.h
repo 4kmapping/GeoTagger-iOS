@@ -23,7 +23,7 @@
 }
 
 @property (strong, nonatomic) GTDataController *dataController;
-@property (nonatomic) NSUInteger currDataIndex;
+@property (nonatomic) NSManagedObject *currLocation;
 
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error;

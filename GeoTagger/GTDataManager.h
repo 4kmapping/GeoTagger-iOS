@@ -17,6 +17,10 @@
 
 - (NSMutableArray *)getAllLocations;
 
-- (NSManagedObject *)saveDesc:(NSString *)desc withLat:(double)latitude withLon:(double)longitude withCreatedTime:(NSDate *)date;
+- (NSManagedObject *)saveDesc:(NSString *)desc withLat:(double)latitude
+                      withLon:(double)longitude
+              withCreatedTime:(NSDate *)date;
+
+- (NSManagedObject *)getLocationWithId:(NSInteger)locId;
 
 @end

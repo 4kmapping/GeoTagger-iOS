@@ -44,18 +44,41 @@
     
     NSError *e = nil;
     
-    NSMutableArray * locations = [[managedContext executeFetchRequest:fetchRequest error:&e] mutableCopy];
+    NSMutableArray *locations = [[managedContext executeFetchRequest:fetchRequest error:&e] mutableCopy];
     
     if(!locations) // error occured.
     {
-        NSLog(@"Can't fetch location data, %@, %@", e, [e localizedDescription]);
+        NSLog(@"Can't fetch all location data, %@, %@", e, [e localizedDescription]);
     }
     
     return locations;
 }
 
+/* REFINE OR DELETE THIS
+ =======
+- (NSManagedObject *)getLocationWithId:(NSInteger)locId
+{
+    NSManagedObjectContext *mContext = [self managedObjectContext];
+    NSFetchRequest *fRequest = [[NSFetchRequest alloc] initWithEntityName:@"Location"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(id = %d)", locId];
+    [fRequest setPredicate:predicate];
+    
+    NSError *e = nil;
+    NSManagedObject *location = [mContext executeFetchRequest:fRequest error:&e][0];
+    
+    if(!location)
+    {
+        NSLog(@"Can't fetch a location data, %@, %@", e, [e localizedDescription]);
+    }
+    
+    return location;
+}
+*/
 
-- (NSManagedObject *)saveDesc:(NSString *)desc withLat:(double)latitude withLon:(double)longitude withCreatedTime:(NSDate *)date
+
+- (NSManagedObject *)saveDesc:(NSString *)desc withLat:(double)latitude
+                      withLon:(double)longitude
+              withCreatedTime:(NSDate *)date
 {
     NSManagedObjectContext *context = [self managedObjectContext];
     // Create a new managed object
@@ -64,7 +87,10 @@
     [newLocation setValue:desc forKey:@"desc"];
     [newLocation setValue:[NSNumber numberWithDouble:latitude] forKey:@"latitude"];
     [newLocation setValue:[NSNumber numberWithDouble:longitude] forKey:@"longitude"];
-    [newLocation setValue:date forKey:@"created"];
+    [newLocation setValue:[date description] forKey:@"created"];
+    
+    NSLog(@"Before saving, object id of new location is: %@ <<", [newLocation objectID]);
+    
     
     NSError *error = nil;
     // Save the object to persistent store.
@@ -72,6 +98,17 @@
     {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
+
+    NSLog(@"After saving, object id of new location is: %@ <<", [newLocation objectID]);
+
+    /*
+    [newLocation setValue:[[newLocation objectID] description ] forKey:@"uuid"];
+    
+    if (![context save:&error])
+    {
+        NSLog(@"Can't update with object id! %@ %@", error, [error localizedDescription]);
+    }
+    */
     
     return newLocation;
 

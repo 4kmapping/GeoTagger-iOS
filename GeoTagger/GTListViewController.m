@@ -31,9 +31,26 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     dataManager = [GTDataManager getInstance];
+    
+    /*
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillEnterForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
+     */
+}
+
+
+/***
+ This method is called whenever this tableView appears.
+ Refresh location data with new ones.
+ */
+- (void)viewWillAppear:(BOOL)animated
+{
+    //GTDataManager *dataManager = [GTDataManager getInstance];
+    // Refresh location info
     locationArray = [dataManager getAllLocations];
-    
-    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,6 +105,11 @@
     }
 }
 
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+}
 
 @end
 

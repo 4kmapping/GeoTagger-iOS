@@ -17,4 +17,5 @@
 @property (strong, nonatomic) NSManagedObject *currLocation;
 @property (nonatomic, copy) CLLocation *location;
 
+
 @end
