@@ -49,7 +49,7 @@
 {
     //GTDataManager *dataManager = [GTDataManager getInstance];
     // Refresh location info
-    locationArray = [dataManager getAllLocations];
+    locationArray = [dataManager getAllLocationsWithDescendingDateSorting];
     [self.tableView reloadData];
 }
 

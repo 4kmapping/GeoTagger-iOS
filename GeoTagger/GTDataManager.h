@@ -17,6 +17,8 @@
 
 - (NSMutableArray *)getAllLocations;
 
+- (NSMutableArray *)getAllLocationsWithDescendingDateSorting;
+
 - (NSManagedObject *)saveDesc:(NSString *)desc withLat:(double)latitude
                       withLon:(double)longitude
               withCreatedTime:(NSDate *)date;

@@ -54,6 +54,29 @@
     return locations;
 }
 
+
+- (NSMutableArray *)getAllLocationsWithDescendingDateSorting
+{
+    NSManagedObjectContext *managedContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Location"];
+
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"created" ascending:NO];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sort, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSError *e = nil;
+    
+    NSMutableArray *locations = [[managedContext executeFetchRequest:fetchRequest error:&e] mutableCopy];
+    
+    if(!locations) // error occured.
+    {
+        NSLog(@"Can't fetch all location data, %@, %@", e, [e localizedDescription]);
+    }
+    
+    return locations;
+}
+
+
 /* REFINE OR DELETE THIS
  =======
 - (NSManagedObject *)getLocationWithId:(NSInteger)locId
