@@ -21,6 +21,5 @@
                       withLon:(double)longitude
               withCreatedTime:(NSDate *)date;
 
-- (NSManagedObject *)getLocationWithId:(NSInteger)locId;
 
 @end

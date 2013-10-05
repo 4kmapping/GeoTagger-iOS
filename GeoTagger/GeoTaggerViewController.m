@@ -77,6 +77,7 @@
     // Center map to the current location
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 3000, 3000);
     [worldView setRegion:region animated:YES];
+
     
 /*
     // How many seconds ago was this new location created?
@@ -111,11 +112,16 @@
 - (void)mapView:(MKMapView *)mapView
     didUpdateUserLocation:(MKUserLocation *)userLocation
 {
+
+    // Disable default "Current Locaton" callout bubble.
+    userLocation.title = nil;
+    userLocation.subtitle = nil;
+    
     CLLocationCoordinate2D loc = [[userLocation location] coordinate];
     // Using a MapKit function
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(loc, 3000,3000);
-    
     [worldView setRegion:region animated:YES];
+    
     
 }
 
@@ -242,8 +248,13 @@
 {
     // If it's the user location, just return nil.
     if ([annotation isKindOfClass:[MKUserLocation class]])
+    {
+        MKAnnotationView* annotationView = [mapView viewForAnnotation:annotation];
+        annotationView.canShowCallout = NO;
+        
         return nil;
-    
+    }
+        
     // Handle any custom annotations.
     if ([annotation isKindOfClass:[GTMapPoint class]])
     {        

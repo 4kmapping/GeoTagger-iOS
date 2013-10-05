@@ -78,7 +78,7 @@
             </objects>
             <point key="canvasLocation" x="446" y="830"/>
         </scene>
-        <!--List View Controller-->
+        <!--List View Controller - Data History-->
         <scene sceneID="IcH-Gi-nT7">
             <objects>
                 <viewController id="cAf-4P-Xnh" customClass="GTListViewController" sceneMemberID="viewController">
@@ -116,7 +116,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Lkt-eS-MUY"/>
+                    <navigationItem key="navigationItem" title="Data History" id="Lkt-eS-MUY"/>
                     <connections>
                         <outlet property="tableView" destination="nFk-vQ-nSW" id="X4U-Gk-dc1"/>
                     </connections>
@@ -125,7 +125,7 @@
             </objects>
             <point key="canvasLocation" x="962" y="830"/>
         </scene>
-        <!--Form View Controller-->
+        <!--Form View Controller - Data Form-->
         <scene sceneID="twk-n2-PYR">
             <objects>
                 <tableViewController id="wdL-5O-kgV" customClass="GTFormViewController" sceneMemberID="viewController">
@@ -188,7 +188,7 @@
                             <outlet property="delegate" destination="wdL-5O-kgV" id="ra9-Gc-oQQ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="AT0-yY-SCL">
+                    <navigationItem key="navigationItem" title="Data Form" id="AT0-yY-SCL">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="j9A-M4-acJ">
                             <connections>
                                 <segue destination="zxM-X4-yT9" kind="unwind" identifier="CancelInput" unwindAction="cancel:" id="dyD-ID-RPl"/>
@@ -227,12 +227,12 @@
             </objects>
             <point key="canvasLocation" x="1676" y="-651"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--Detail View Controller - Details-->
         <scene sceneID="yHh-AP-qFm">
             <objects>
                 <tableViewController id="SPe-Vw-ent" customClass="GTDetailViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Lr0-P1-tE4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -342,7 +342,7 @@
                             <outlet property="delegate" destination="SPe-Vw-ent" id="AmF-RK-inf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="pGw-uh-SeY"/>
+                    <navigationItem key="navigationItem" title="Details" id="pGw-uh-SeY"/>
                     <connections>
                         <outlet property="createdLabel" destination="0uf-gT-sM2" id="9Ha-Bj-Pgc"/>
                         <outlet property="descLabel" destination="U77-8l-mpN" id="cam-QE-6OQ"/>
@@ -399,6 +399,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="QFL-XT-E9P"/>
+        <segue reference="AlC-kJ-cTE"/>
     </inferredMetricsTieBreakers>
 </document>
