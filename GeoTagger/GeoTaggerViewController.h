@@ -33,6 +33,9 @@
 
 - (void)findLocation;
 
+// actions for a button
+- (IBAction)updateLocation:(id)sender;
+
 // unwind actions for form view controller
 - (IBAction)done:(UIStoryboardSegue *)segue;
 - (IBAction)cancel:(UIStoryboardSegue *)segue;

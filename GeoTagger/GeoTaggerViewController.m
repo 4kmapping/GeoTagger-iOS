@@ -60,6 +60,24 @@
            fromLocation:(CLLocation *)oldLocation
 {
     NSLog(@"%@", newLocation);
+    [locationManager stopUpdatingLocation];
+    [activityIndicator stopAnimating];
+
+    // How many seconds ago was this new location created?
+    NSTimeInterval t = [[newLocation timestamp] timeIntervalSinceNow];
+    // CLLocationManager will return the last found location of the device first,
+    // you don't want that data in this case. If this location was created more
+    // than 3 minutes ago, ignore it
+    if (t< -180)
+    {
+        // This is cached data, I don't want it
+        return;
+    }
+    
+    // Center map to the current location
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 3000, 3000);
+    [worldView setRegion:region animated:YES];
+    
 /*
     // How many seconds ago was this new location created?
     NSTimeInterval t = [[newLocation timestamp] timeIntervalSinceNow];
@@ -112,6 +130,12 @@
 }
 
 - (void)findLocation
+{
+    [locationManager startUpdatingLocation];
+    [activityIndicator startAnimating];
+}
+
+- (IBAction)updateLocation:(id)sender
 {
     [locationManager startUpdatingLocation];
     [activityIndicator startAnimating];
