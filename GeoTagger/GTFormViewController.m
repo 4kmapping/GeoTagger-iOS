@@ -10,6 +10,7 @@
 #import "GTData.h"
 #import "GTDataManager.h"
 #import <CoreLocation/CoreLocation.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface GTFormViewController ()
 
@@ -39,6 +40,29 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    // ADDED
+    //UIScrollView *scrollView  =[[UIScrollView alloc] init];
+    // END
+    
+    [self.scrollView setDelegate:self];
+    //[self.scrollView setScrollEnabled:YES];
+    self.scrollView.contentSize = self.contentView.bounds.size;
+    
+
+    
+    // Set text view boundary color with a line.
+    self.descField.layer.borderWidth = 0.0f;
+    self.descField.layer.borderColor = [[UIColor grayColor] CGColor];
+    
+    self.tagsField.layer.borderWidth = 0.0f;
+    self.tagsField.layer.borderColor = [[UIColor grayColor] CGColor];
+
+    //self.scrollView.contentSize = self.contentView.bounds.size;
+    
+    // Set delegate
+    [self.descField setDelegate:self];
+    [self.tagsField setDelegate:self];
+    
 }
 
 
@@ -50,15 +74,37 @@
 }
 
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+/*
+    To hide keyboard when return key is pressed
+ */
+- (BOOL)textFieldShouldReturn:(UITextField *)sender
 {
-    if (textField == self.descInput)
+    NSLog(@"return key...");
+    if (sender == self.tagsField)
     {
-        [textField resignFirstResponder];
+        [sender resignFirstResponder];
+    }
+    
+    [sender resignFirstResponder];
+    
+    return YES;
+}
+
+/*
+ 
+*/
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
+    replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"])
+    {
+        [textView resignFirstResponder];
     }
     
     return YES;
 }
+
+
 
 
  #pragma mark - Navigation
@@ -70,11 +116,11 @@
     // Pass the selected object to the new view controller.
     if ([[segue identifier] isEqualToString:@"ReturnInput"])
     {
-        if ([self.descInput.text length])
+        if ([self.descField.text length])
         {
             GTDataManager *dataManager = [GTDataManager getInstance];
             
-            self.currLocation = [dataManager saveDesc:self.descInput.text
+            self.currLocation = [dataManager saveDesc:self.descField.text
                           withLat:self.location.coordinate.latitude
                           withLon:self.location.coordinate.longitude
                   withCreatedTime:self.location.timestamp];

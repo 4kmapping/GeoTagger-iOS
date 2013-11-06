@@ -30,6 +30,7 @@
 		ABD0464A17F513E500C0B201 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD0464917F513E500C0B201 /* CoreLocation.framework */; };
 		ABD0464C17F513F000C0B201 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD0464B17F513F000C0B201 /* MapKit.framework */; };
 		ABD0469317F5244700C0B201 /* GTMapPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD0469217F5244700C0B201 /* GTMapPoint.m */; };
+		ABE17C6917FD0B4D0090C95F /* GTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE17C6817FD0B4D0090C95F /* GTListViewController.m */; };
 		ABEB4F8017F94ECF00DE0209 /* GTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABEB4F7F17F94ECF00DE0209 /* GTDetailViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,8 @@
 		ABD0464B17F513F000C0B201 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		ABD0469117F5244700C0B201 /* GTMapPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMapPoint.h; sourceTree = "<group>"; };
 		ABD0469217F5244700C0B201 /* GTMapPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMapPoint.m; sourceTree = "<group>"; };
+		ABE17C6717FD0B4D0090C95F /* GTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTListViewController.h; sourceTree = "<group>"; };
+		ABE17C6817FD0B4D0090C95F /* GTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTListViewController.m; sourceTree = "<group>"; };
 		ABEB4F7E17F94ECF00DE0209 /* GTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDetailViewController.h; sourceTree = "<group>"; };
 		ABEB4F7F17F94ECF00DE0209 /* GTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +147,7 @@
 		ABD0461A17F513CD00C0B201 /* GeoTagger */ = {
 			isa = PBXGroup;
 			children = (
+				ABA8BCB617FB98C100245158 /* GeoTagger.xcdatamodeld */,
 				ABD0462317F513CD00C0B201 /* GeoTaggerAppDelegate.h */,
 				ABD0462417F513CD00C0B201 /* GeoTaggerAppDelegate.m */,
 				ABD0462917F513CD00C0B201 /* GeoTaggerViewController.h */,
@@ -158,12 +162,13 @@
 				ABEB4F7F17F94ECF00DE0209 /* GTDetailViewController.m */,
 				AB597A0417F6326B00970F95 /* GTFormViewController.h */,
 				AB597A0517F6326B00970F95 /* GTFormViewController.m */,
+				ABE17C6717FD0B4D0090C95F /* GTListViewController.h */,
+				ABE17C6817FD0B4D0090C95F /* GTListViewController.m */,
 				ABD0469117F5244700C0B201 /* GTMapPoint.h */,
 				ABD0469217F5244700C0B201 /* GTMapPoint.m */,
 				ABD0462C17F513CD00C0B201 /* Images.xcassets */,
 				ABD0462617F513CD00C0B201 /* Main.storyboard */,
 				ABD0461B17F513CD00C0B201 /* Supporting Files */,
-				ABA8BCB617FB98C100245158 /* GeoTagger.xcdatamodeld */,
 			);
 			path = GeoTagger;
 			sourceTree = "<group>";
@@ -296,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABEB4F8017F94ECF00DE0209 /* GTDetailViewController.m in Sources */,
+				ABE17C6917FD0B4D0090C95F /* GTListViewController.m in Sources */,
 				AB597A0917F6436500970F95 /* GTData.m in Sources */,
 				ABD0462B17F513CD00C0B201 /* GeoTaggerViewController.m in Sources */,
 				ABD0462517F513CD00C0B201 /* GeoTaggerAppDelegate.m in Sources */,

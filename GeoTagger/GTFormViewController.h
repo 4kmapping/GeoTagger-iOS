@@ -10,12 +10,25 @@
 #import <CoreLocation/CoreLocation.h>
 @class GTData;
 
-@interface GTFormViewController : UITableViewController <UITextFieldDelegate>
+@interface GTFormViewController : UIViewController
+    <UITextFieldDelegate, UITextViewDelegate, UIScrollViewDelegate>
+{
+    
+}
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 
-@property (weak, nonatomic) IBOutlet UITextField *descInput;
+
+@property (strong, nonatomic) IBOutlet UISwitch *evanType;
+@property (strong, nonatomic) IBOutlet UISwitch *trainType;
+@property (strong, nonatomic) IBOutlet UISwitch *mercyType;
+@property (strong, nonatomic) IBOutlet UITextView *descField;
+@property (strong, nonatomic) IBOutlet UITextField *tagsField;
+
 @property (strong, nonatomic) GTData *gtData;
 @property (strong, nonatomic) NSManagedObject *currLocation;
 @property (nonatomic, copy) CLLocation *location;
 
+- (IBAction)textFieldReturn:(id)sender;
 
 @end
