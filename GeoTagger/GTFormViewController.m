@@ -48,8 +48,6 @@
     //[self.scrollView setScrollEnabled:YES];
     self.scrollView.contentSize = self.contentView.bounds.size;
     
-
-    
     // Set text view boundary color with a line.
     self.descField.layer.borderWidth = 0.0f;
     self.descField.layer.borderColor = [[UIColor grayColor] CGColor];
@@ -75,7 +73,7 @@
 
 
 /*
-    To hide keyboard when return key is pressed
+    To hide keyboard when a return key in text field is pressed
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)sender
 {
@@ -91,7 +89,7 @@
 }
 
 /*
- 
+    To hide keyboard when a return key in text area is pressed
 */
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
     replacementText:(NSString *)text
@@ -105,6 +103,19 @@
 }
 
 
+- (IBAction)cancel:(id)sender
+{
+    [[self presentingViewController] dismissViewControllerAnimated:YES
+                                                        completion:nil];
+}
+
+
+- (IBAction)save:(id)sender
+{
+    NSLog(@"User hit the save button.");
+    [[self presentingViewController] dismissViewControllerAnimated:YES
+                                                        completion:nil];
+}
 
 
  #pragma mark - Navigation

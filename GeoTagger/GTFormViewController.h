@@ -30,5 +30,8 @@
 @property (nonatomic, copy) CLLocation *location;
 
 - (IBAction)textFieldReturn:(id)sender;
+- (IBAction)cancel:(id)sender;
+- (IBAction)save:(id)sender;
+
 
 @end
