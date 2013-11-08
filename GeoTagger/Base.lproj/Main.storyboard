@@ -310,6 +310,9 @@
                                                 <state key="normal" title="Take Photo">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="takePhoto:" destination="OkR-cW-fVm" eventType="touchUpInside" id="rbT-KD-mOC"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8jf-MR-fQy">
                                                 <rect key="frame" x="203" y="502" width="89" height="30"/>
@@ -317,6 +320,9 @@
                                                 <state key="normal" title="Select Photo">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="selectPhoto:" destination="OkR-cW-fVm" eventType="touchUpInside" id="nWd-rg-6Ir"/>
+                                                </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="0Pq-ev-6Dv">
                                                 <rect key="frame" x="45" y="544" width="230" height="230"/>
@@ -361,6 +367,7 @@
                         <outlet property="contentView" destination="LQN-Cw-FB4" id="kW8-e7-REO"/>
                         <outlet property="descField" destination="la4-NW-kih" id="Tle-IS-guO"/>
                         <outlet property="evanType" destination="eoA-jK-HdO" id="vRl-JE-XxH"/>
+                        <outlet property="imageView" destination="0Pq-ev-6Dv" id="f8D-jT-cGf"/>
                         <outlet property="mercyType" destination="zgp-S1-e8f" id="vZs-Wx-gEE"/>
                         <outlet property="scrollView" destination="3GZ-T2-dFa" id="1SX-fb-X4I"/>
                         <outlet property="tagsField" destination="4IP-iV-dj5" id="7Ly-T4-8g5"/>

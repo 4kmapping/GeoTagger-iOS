@@ -11,12 +11,14 @@
 @class GTData;
 
 @interface GTFormViewController : UIViewController
-    <UITextFieldDelegate, UITextViewDelegate, UIScrollViewDelegate>
+    <UITextFieldDelegate, UITextViewDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate>
 {
     
 }
+
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 
 @property (strong, nonatomic) IBOutlet UISwitch *evanType;
@@ -32,6 +34,9 @@
 - (IBAction)textFieldReturn:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;
+
+- (IBAction)takePhoto:(UIButton *)sender;
+- (IBAction)selectPhoto:(UIButton *)sender;
 
 
 @end
