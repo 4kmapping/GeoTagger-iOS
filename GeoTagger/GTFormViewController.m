@@ -40,6 +40,15 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+
+    
     
     [self.scrollView setDelegate:self];
     self.scrollView.contentSize = self.contentView.bounds.size;
@@ -51,9 +60,13 @@
     self.tagsField.layer.borderWidth = 0.0f;
     self.tagsField.layer.borderColor = [[UIColor grayColor] CGColor];
     
-    // Set delegate
+    // Set delegate for text fields
     [self.descField setDelegate:self];
     [self.tagsField setDelegate:self];
+    [self.contactEmail setDelegate:self];
+    [self.contactPhone setDelegate:self];
+    [self.contactWebsite setDelegate:self];
+    
 
     // Check if a mobile device has a camera capability and if not, inform a user with a warning.
     if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
@@ -71,6 +84,21 @@
 }
 
 
+- (void)viewDidUnload {
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+    
+    // unregister for keyboard notifications while not visible.
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    // unregister for keyboard notifications while not visible.
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -79,17 +107,89 @@
 }
 
 
+# pragma mark - Keyboard Interaction 
+
+// If Keyboard hides a text field, the text field will move up above keyboard
+// *******
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your app might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    
+    UITextView *textview = (UITextView *)activeField;
+    if([textview isEqual:self.descField])
+    {
+        if (!CGRectContainsPoint(aRect, textview.frame.origin) )
+        {
+            [self.scrollView scrollRectToVisible:textview.frame animated:YES];
+        }
+    }
+    else
+    {
+        UITextField *textfield = (UITextField *)activeField;
+        if (!CGRectContainsPoint(aRect, textfield.frame.origin) )
+        {
+            [self.scrollView scrollRectToVisible:textfield.frame animated:YES];
+        }
+        
+    }
+
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    activeField = textView;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    activeField = nil;
+}
+
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    activeField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    activeField = nil;
+}
+
+
+// End of Keyboard Interaction
+
+
 /*
     To hide keyboard when a return key in text field is pressed
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)sender
 {
-    NSLog(@"return key...");
-    if (sender == self.tagsField)
-    {
-        [sender resignFirstResponder];
-    }
-    
+//    if (sender == self.tagsField | sender == self.contactEmail | sender == self.)
+//    {
+//        [sender resignFirstResponder];
+//    }
+    NSLog(@"return key hit");
     [sender resignFirstResponder];
     
     return YES;
@@ -101,6 +201,7 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
     replacementText:(NSString *)text
 {
+    
     if ([text isEqualToString:@"\n"])
     {
         [textView resignFirstResponder];
