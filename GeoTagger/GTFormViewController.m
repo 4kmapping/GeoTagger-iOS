@@ -303,7 +303,6 @@
     [newLocation setValue:[[self descField] text] forKey:@"desc"];
     [newLocation setValue:[[self tagsField] text] forKey:@"tags"];
     
-    [newLocation setValue:[[ forKey:@""];
     
     
     // Save the object to persistent store.
