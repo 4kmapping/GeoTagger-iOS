@@ -80,6 +80,7 @@
 		ABD0469217F5244700C0B201 /* GTMapPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMapPoint.m; sourceTree = "<group>"; };
 		ABE17C6717FD0B4D0090C95F /* GTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTListViewController.h; sourceTree = "<group>"; };
 		ABE17C6817FD0B4D0090C95F /* GTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTListViewController.m; sourceTree = "<group>"; };
+		ABE3AFD8183C40A30034319B /* GeoTagger 0.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GeoTagger 0.1.xcdatamodel"; sourceTree = "<group>"; };
 		ABEB4F7E17F94ECF00DE0209 /* GTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDetailViewController.h; sourceTree = "<group>"; };
 		ABEB4F7F17F94ECF00DE0209 /* GTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -536,6 +537,7 @@
 		ABA8BCB617FB98C100245158 /* GeoTagger.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				ABE3AFD8183C40A30034319B /* GeoTagger 0.1.xcdatamodel */,
 				ABA8BCB717FB98C100245158 /* GeoTagger.xcdatamodel */,
 			);
 			currentVersion = ABA8BCB717FB98C100245158 /* GeoTagger.xcdatamodel */;

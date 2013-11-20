@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F37" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13A603" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Location" syncable="YES">
-        <attribute name="created" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="artsType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="bibleStudyType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="campusType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="churchPlantingType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="communityDevType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="constructionType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="counselingType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="evanType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="healthcareType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="hospitalType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="indigenousType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="mediaType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="mercyType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="orphansType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="photoId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="prisonType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="prostitutesType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="researchType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trainType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="urbanType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="womenType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="youthType" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
     <elements>
         <element name="Location" positionX="0" positionY="0" width="0" height="0"/>

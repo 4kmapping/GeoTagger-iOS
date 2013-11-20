@@ -33,7 +33,7 @@
 @property (strong, nonatomic) IBOutlet UISwitch *campusType;
 @property (strong, nonatomic) IBOutlet UISwitch *indigenousType;
 @property (strong, nonatomic) IBOutlet UISwitch *prisonType;
-@property (strong, nonatomic) IBOutlet UISwitch *ProstitutesType;
+@property (strong, nonatomic) IBOutlet UISwitch *prostitutesType;
 @property (strong, nonatomic) IBOutlet UISwitch *orphansType;
 @property (strong, nonatomic) IBOutlet UISwitch *womenType;
 @property (strong, nonatomic) IBOutlet UISwitch *urbanType;

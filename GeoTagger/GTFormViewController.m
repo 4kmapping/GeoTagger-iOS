@@ -11,6 +11,7 @@
 #import "GTDataManager.h"
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
+#import <CoreLocation/CLLocation.h>
 
 @interface GTFormViewController ()
 
@@ -220,10 +221,31 @@
 
 - (IBAction)save:(id)sender
 {
-    NSLog(@"User hit the save button.");
+    double timestamp = [[NSDate date] timeIntervalSince1970];
+    
+    
     [[self presentingViewController] dismissViewControllerAnimated:YES
                                                         completion:nil];
     
+    // Create a new location object to save
+    //
+    GTDataManager *dataManager = [GTDataManager getInstance];
+    
+    NSManagedObjectContext *context = [dataManager managedObjectContext];
+    // Create a new managed object
+    NSManagedObject *newLocation = [NSEntityDescription insertNewObjectForEntityForName:@"Location"
+                                                                 inManagedObjectContext:context];
+    
+    // Save location info.
+    CLLocationCoordinate2D coordinate = [[self location] coordinate];
+    
+    NSLog(@"latitude: %f", coordinate.latitude);
+    
+    [newLocation setValue:[NSNumber numberWithDouble:coordinate.latitude] forKey:@"latitude"];
+    [newLocation setValue:[NSNumber numberWithDouble:coordinate.longitude] forKey:@"longitude"];
+    
+    // Save timestamp
+    [newLocation setValue:[NSNumber numberWithDouble:timestamp] forKey:@"created"];
     
     // Store a photo
     if(self.imageView.image)
@@ -242,12 +264,56 @@
                                       withIntermediateDirectories:NO
                                                        attributes:nil
                                                             error:&error]; //Create folder
+        NSString *photoid = [NSString stringWithFormat:@"%f.png", timestamp];
         
-        NSString *filePath = [folderPath stringByAppendingPathComponent:@"imagefile.png"];
+        NSString *filePath = [folderPath stringByAppendingPathComponent:photoid];
         
         [pngData writeToFile:filePath atomically:YES]; //Write the file
+        
+        [newLocation setValue:photoid forKey:@"photoId"];
    
     }
+
+    
+    // Save checklist and other text fields.
+    
+    [newLocation setValue:[NSNumber numberWithBool:[[self evanType] isOn]] forKey:@"evanType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self trainType] isOn]] forKey:@"trainType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self mercyType] isOn]] forKey:@"mercyType"];
+    
+    [newLocation setValue:[NSNumber numberWithBool:[[self youthType] isOn]] forKey:@"youthType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self campusType] isOn]] forKey:@"campusType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self indigenousType] isOn]] forKey:@"indigenousType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self prisonType] isOn]] forKey:@"prisonType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self prostitutesType] isOn]] forKey:@"prostitutesType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self orphansType] isOn]] forKey:@"orphansType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self womenType] isOn]] forKey:@"womenType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self urbanType] isOn]] forKey:@"urbanType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self hospitalType] isOn]] forKey:@"hospitalType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self mediaType] isOn]] forKey:@"mediaType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self communityDevType] isOn]] forKey:@"communityDevType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self bibleStudyType] isOn]] forKey:@"bibleStudyType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self churchPlantingType] isOn]] forKey:@"churchPlantingType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self artsType] isOn]] forKey:@"artsType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self counselingType] isOn]] forKey:@"counselingType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self healthcareType] isOn]] forKey:@"healthcareType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self constructionType] isOn]] forKey:@"constructionType"];
+    [newLocation setValue:[NSNumber numberWithBool:[[self researchType] isOn]] forKey:@"researchType"];
+    
+    [newLocation setValue:[[self descField] text] forKey:@"desc"];
+    [newLocation setValue:[[self tagsField] text] forKey:@"tags"];
+    
+    [newLocation setValue:[[ forKey:@""];
+    
+    
+    // Save the object to persistent store.
+    //
+    NSError *error = nil;
+    if (![context save:&error])
+    {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+    
     
 }
 

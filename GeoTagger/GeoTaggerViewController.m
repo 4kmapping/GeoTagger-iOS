@@ -213,18 +213,19 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    
     if ([[segue identifier] isEqualToString:@"AddDataButton"])
     {
+               
         // Stop updating location
         [locationManager stopUpdatingLocation];
         
         // Pass location info to GTFormViewcontroller
         // ***
         // Get current location and send it with segue
-        UINavigationController *navController = [segue destinationViewController];
-        GTFormViewController *formController = [navController.viewControllers objectAtIndex:0];
+        GTFormViewController *formController = [segue destinationViewController];
+
         // Register location into destination view controller
-        
         CLLocation *currLoc = [locationManager location];
         
         // Initialize for an initial map view.
@@ -232,7 +233,8 @@
         {
             currLoc = [[CLLocation alloc] initWithLatitude:20.22 longitude:120.33];
         }
-        formController.location = currLoc;
+        
+        [formController setLocation:currLoc];
     }
     
     if ([[segue identifier] isEqualToString:@"DetailViewSegue"])
