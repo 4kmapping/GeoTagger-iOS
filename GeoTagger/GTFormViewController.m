@@ -19,27 +19,11 @@
 
 @implementation GTFormViewController
 
-/* SPECIFIED IN Canvas
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
@@ -95,7 +79,6 @@
         [self.mercyType setOn:[[[self locationToDisplay] valueForKey:@"mercyType"] boolValue]];
         [self.mercyType setEnabled:self.editMode] ;
 
-        
         
         [self.youthType setOn:[[[self locationToDisplay] valueForKey:@"youthType"] boolValue]];
         [self.youthType setEnabled:self.editMode];
@@ -164,38 +147,65 @@
         [self.contactWebsite setText:[[self locationToDisplay] valueForKey:@"contactWebsite"]];
         [self.contactPhone setText:[[self locationToDisplay] valueForKey:@"contactPhone"]];
 
+        // Load saved photo to display
+        NSString *photoid = [[self locationToDisplay] valueForKey:@"photoId"];
+        
+        if([photoid length] > 0)
+        {
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+            // Set folder path for photo. If no photo folder existing yet, create one.
+            NSString *folderPath = [documentsPath stringByAppendingPathComponent:@"/photo"]; //Add the file name
+            NSString *filePath = [folderPath stringByAppendingPathComponent:photoid];
+            
+            NSLog(@"image file: %@", filePath);
+            
+            UIImage *img = [[UIImage alloc] initWithContentsOfFile:filePath];
+            
+            [self.imageView setImage:img];
+            
+        }
     
         // Hide UIToolBar from UI
+        //
+        
+        // First get the height of toolbar
+        int toolbarHeight = 0;
+        
         for ( id view in self.view.subviews)
         {
             if ([((UIView *)view).restorationIdentifier isEqualToString:@"FormToolbar"] )
             {
-                [((UIToolbar *)view) removeFromSuperview];
-            }
-            
-            // TODO: Increasing scrollview
-            // ***************************
-            if ([((UIView *)view).restorationIdentifier isEqualToString:@"FormContentview"] )
-            {
-                // increase scrollview height to cover hiden UIToolbar
-                /*
-                CGSize oldSize = [((UIScrollView *)view) contentSize];
-                CGSize newSize = CGSizeMake(oldSize.width, oldSize.height + 44.0);
-                [((UIScrollView *)view) setContentSize:newSize];
-                */
+                UIToolbar *toolbar = (UIToolbar *) view;
+                toolbarHeight = toolbar.frame.size.height;
+                [toolbar removeFromSuperview];
                 
-                /*
-                CGRect newFrame = ((UIView *)view).frame;
-                newFrame.size.height = newFrame.size.height + 44;
-                
-                [view setFrame:newFrame];
-                */
+                //NSLog(@"Toolbar height: %d", toolbarHeight);
             }
         }
         
+        // Increase scroll view by height of toolbar.
+        for ( id view in self.view.subviews)
+        {
+
+            if ([((UIView *)view).restorationIdentifier isEqualToString:@"FormScrollview"])
+            {
+                // increase scrollview height to cover hiden UIToolbar
+                
+                UIScrollView *scrollView = (UIScrollView *)view;
+                
+                CGSize oldSize = [scrollView contentSize];
+                CGSize newSize = CGSizeMake(oldSize.width, oldSize.height + 44.0);
+                [scrollView setContentSize:newSize];
+                
+                // NSLog(@"Second, toolbar height: %d", toolbarHeight);
+                
+                // Increase twice of toolbar height due to head toolbar and foot toolbar.
+                scrollView.frame = CGRectMake(0,0, scrollView.frame.size.width,
+                                              scrollView.frame.size.height + 2 *toolbarHeight);
+            }
+        }
     }
-    
-    
 }
 
 
@@ -428,8 +438,6 @@
     [newLocation setValue:[[self contactPhone] text] forKey:@"contactPhone"];
     [newLocation setValue:[[self contactWebsite] text] forKey:@"contactWebsite"];
     
-    
-    
     // Save the object to persistent store.
     //
     NSError *error = nil;
@@ -437,7 +445,6 @@
     {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
-    
     
 }
 
@@ -469,24 +476,30 @@
 
 - (IBAction)takePhoto:(UIButton *)sender
 {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    //picker.showsCameraControls = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    if (self.editMode)
+    {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        //picker.showsCameraControls = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     
-    [self presentViewController:picker animated:YES completion:NULL];
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
 }
 
 
 - (IBAction)selectPhoto:(UIButton *)sender
 {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
+    if (self.editMode)
+    {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker

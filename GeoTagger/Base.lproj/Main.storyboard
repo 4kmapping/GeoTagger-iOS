@@ -121,11 +121,11 @@
         <scene sceneID="Lll-aH-QoQ">
             <objects>
                 <viewController id="OkR-cW-fVm" customClass="GTFormViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="NTQ-OC-aRy">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="FormBaseView" id="NTQ-OC-aRy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="2000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3GZ-T2-dFa">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="FormScrollview" id="3GZ-T2-dFa">
                                 <rect key="frame" x="0.0" y="55" width="320" height="1895"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
