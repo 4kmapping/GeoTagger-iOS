@@ -52,9 +52,21 @@
 @property (strong, nonatomic) IBOutlet UITextView *descField;
 @property (strong, nonatomic) IBOutlet UITextField *tagsField;
 
-@property (strong, nonatomic) GTData *gtData;
-@property (strong, nonatomic) NSManagedObject *currLocation;
+# pragma mark contact
+@property (strong, nonatomic) IBOutlet UISwitch *contactConfirmed;
+@property (strong, nonatomic) IBOutlet UITextField *contactEmail;
+@property (strong, nonatomic) IBOutlet UITextField *contactPhone;
+@property (strong, nonatomic) IBOutlet UITextField *contactWebsite;
+
 @property (nonatomic, copy) CLLocation *location;
+
+// Mode indicates the purpose of displaying a form.
+// Values can be view-only (for already existing data).
+@property BOOL editMode;
+
+// For detail view, spectific existing data id that needs to be displayed.
+@property (nonatomic, strong) NSManagedObject *locationToDisplay;
+
 
 //- (IBAction)textFieldShouldReturn:(id)sender;
 - (IBAction)cancel:(id)sender;
@@ -64,11 +76,6 @@
 - (IBAction)selectPhoto:(UIButton *)sender;
 
 
-# pragma mark contact
-@property (strong, nonatomic) IBOutlet UISwitch *contactConfirmed;
-@property (strong, nonatomic) IBOutlet UITextField *contactEmail;
-@property (strong, nonatomic) IBOutlet UITextField *contactPhone;
-@property (strong, nonatomic) IBOutlet UITextField *contactWebsite;
 
 
 

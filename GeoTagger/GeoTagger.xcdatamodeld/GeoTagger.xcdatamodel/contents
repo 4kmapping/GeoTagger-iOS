@@ -7,6 +7,10 @@
         <attribute name="churchPlantingType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="communityDevType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="constructionType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="contactConfirmed" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="contactEmail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactPhone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactWebsite" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="counselingType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="created" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>

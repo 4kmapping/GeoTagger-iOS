@@ -178,7 +178,7 @@
     {
 
         GTFormViewController *formController = [segue sourceViewController];
-        self.currLocation = formController.currLocation;
+        self.currLocation = [formController location];
         if (self.currLocation)
         {
             // Create an annotation on a map.
@@ -235,6 +235,11 @@
         }
         
         [formController setLocation:currLoc];
+        
+        // Set conditions for a form.
+        // For new data recording, Edit mode should be True and dataToDisplay should be none
+        [formController setEditMode:TRUE];
+        [formController setLocationToDisplay:NULL];
     }
     
     if ([[segue identifier] isEqualToString:@"DetailViewSegue"])

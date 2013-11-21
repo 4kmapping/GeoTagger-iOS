@@ -9,6 +9,7 @@
 #import "GTListViewController.h"
 #import "GTDataManager.h"
 #import "GTDetailViewController.h"
+#import "GTFormViewController.h"
 
 
 @interface GTListViewController ()
@@ -92,16 +93,18 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"DetailViewFromListSegue"])
+    
+    if ([[segue identifier] isEqualToString:@"ViewDataFromListSegue"])
     {
-        GTDetailViewController *detailController = [segue destinationViewController];
+        GTFormViewController *formController = [segue destinationViewController];
         
         NSInteger rowIndex = [[self.tableView indexPathForSelectedRow] row];
         NSLog(@"selected row: %d", rowIndex);
         NSManagedObject *location = [locationArray objectAtIndex:rowIndex];
         
-        //detailController.location = location;
-        [detailController setLocation:location];
+        [formController setLocationToDisplay:location];
+        
+        [formController setEditMode:FALSE];
     }
 }
 

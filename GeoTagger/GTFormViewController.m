@@ -48,7 +48,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];
-
     
     
     [self.scrollView setDelegate:self];
@@ -70,7 +69,7 @@
     
 
     // Check if a mobile device has a camera capability and if not, inform a user with a warning.
-    if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] && self.editMode)
     {
         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Warning"
                                                                message:@"Your device does not have a camera"
@@ -82,6 +81,127 @@
         
     }
     
+    
+    // Loading text information and switch values for displaying an existing data
+    if ([self locationToDisplay] != NULL)
+    {
+        
+        [self.evanType setOn:[[[self locationToDisplay] valueForKey:@"evanType"] boolValue]];
+        [self.evanType setEnabled:self.editMode] ;
+        
+        [self.trainType setOn:[[[self locationToDisplay] valueForKey:@"trainType"] boolValue]];
+        [self.trainType setEnabled:self.editMode] ;
+        
+        [self.mercyType setOn:[[[self locationToDisplay] valueForKey:@"mercyType"] boolValue]];
+        [self.mercyType setEnabled:self.editMode] ;
+
+        
+        
+        [self.youthType setOn:[[[self locationToDisplay] valueForKey:@"youthType"] boolValue]];
+        [self.youthType setEnabled:self.editMode];
+        
+        [self.campusType setOn:[[[self locationToDisplay] valueForKey:@"campusType"] boolValue]];
+        [self.campusType setEnabled:self.editMode];
+        
+        [self.indigenousType setOn:[[[self locationToDisplay] valueForKey:@"indigenousType"] boolValue]];
+        [self.indigenousType setEnabled:self.editMode];
+    
+        [self.prisonType setOn:[[[self locationToDisplay] valueForKey:@"prisonType"] boolValue]];
+        [self.prisonType setEnabled:self.editMode];
+        
+        [self.prostitutesType setOn:[[[self locationToDisplay] valueForKey:@"prostitutesType"] boolValue]];
+        [self.prostitutesType setEnabled:self.editMode];
+        
+        [self.orphansType setOn:[[[self locationToDisplay] valueForKey:@"orphansType"] boolValue]];
+        [self.orphansType setEnabled:self.editMode];
+        
+        [self.womenType setOn:[[[self locationToDisplay] valueForKey:@"womenType"] boolValue]];
+        [self.womenType setEnabled:self.editMode];
+        
+        [self.urbanType setOn:[[[self locationToDisplay] valueForKey:@"urbanType"] boolValue]];
+        [self.urbanType setEnabled:self.editMode];
+        
+        [self.hospitalType setOn:[[[self locationToDisplay] valueForKey:@"hospitalType"] boolValue]];
+        [self.hospitalType setEnabled:self.editMode];
+
+        [self.mediaType setOn:[[[self locationToDisplay] valueForKey:@"mediaType"] boolValue]];
+        [self.mediaType setEnabled:self.editMode];
+        
+        [self.communityDevType setOn:[[[self locationToDisplay] valueForKey:@"communityDevType"] boolValue]];
+        [self.communityDevType setEnabled:self.editMode];
+        
+        [self.bibleStudyType setOn:[[[self locationToDisplay] valueForKey:@"bibleStudyType"] boolValue]];
+        [self.bibleStudyType setEnabled:self.editMode];
+        
+        [self.churchPlantingType setOn:[[[self locationToDisplay] valueForKey:@"churchPlantingType"] boolValue]];
+        [self.churchPlantingType setEnabled:self.editMode];
+        
+        [self.artsType setOn:[[[self locationToDisplay] valueForKey:@"artsType"] boolValue]];
+        [self.artsType setEnabled:self.editMode];
+        
+        [self.counselingType setOn:[[[self locationToDisplay] valueForKey:@"counselingType"] boolValue]];
+        [self.counselingType setEnabled:self.editMode];
+        
+        [self.healthcareType setOn:[[[self locationToDisplay] valueForKey:@"healthcareType"] boolValue]];
+        [self.healthcareType setEnabled:self.editMode];
+        
+        [self.constructionType setOn:[[[self locationToDisplay] valueForKey:@"constructionType"] boolValue]];
+        [self.constructionType setEnabled:self.editMode];
+        
+        [self.researchType setOn:[[[self locationToDisplay] valueForKey:@"researchType"] boolValue]];
+        [self.researchType setEnabled:self.editMode];
+        
+        [self.descField setText:[[self locationToDisplay] valueForKey:@"desc"]];
+        [self.descField setEditable:self.editMode];
+        
+        [self.tagsField setText:[[self locationToDisplay] valueForKey:@"tags"]];
+
+        
+        [self.contactConfirmed setOn:[[[self locationToDisplay] valueForKey:@"contactConfirmed"] boolValue]];
+        [self.contactConfirmed setEnabled:self.editMode];
+        
+        [self.contactEmail setText:[[self locationToDisplay] valueForKey:@"contactEmail"]];
+        [self.contactWebsite setText:[[self locationToDisplay] valueForKey:@"contactWebsite"]];
+        [self.contactPhone setText:[[self locationToDisplay] valueForKey:@"contactPhone"]];
+
+    
+        // Hide UIToolBar from UI
+        for ( id view in self.view.subviews)
+        {
+            if ([((UIView *)view).restorationIdentifier isEqualToString:@"FormToolbar"] )
+            {
+                [((UIToolbar *)view) removeFromSuperview];
+            }
+            
+            // TODO: Increasing scrollview
+            // ***************************
+            if ([((UIView *)view).restorationIdentifier isEqualToString:@"FormContentview"] )
+            {
+                // increase scrollview height to cover hiden UIToolbar
+                /*
+                CGSize oldSize = [((UIScrollView *)view) contentSize];
+                CGSize newSize = CGSizeMake(oldSize.width, oldSize.height + 44.0);
+                [((UIScrollView *)view) setContentSize:newSize];
+                */
+                
+                /*
+                CGRect newFrame = ((UIView *)view).frame;
+                newFrame.size.height = newFrame.size.height + 44;
+                
+                [view setFrame:newFrame];
+                */
+            }
+        }
+        
+    }
+    
+    
+}
+
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return self.editMode;
 }
 
 
@@ -303,6 +423,11 @@
     [newLocation setValue:[[self descField] text] forKey:@"desc"];
     [newLocation setValue:[[self tagsField] text] forKey:@"tags"];
     
+    [newLocation setValue:[NSNumber numberWithBool:[[self contactConfirmed] isOn]] forKey:@"contactConfirmed"];
+    [newLocation setValue:[[self contactEmail] text] forKey:@"contactEmail"];
+    [newLocation setValue:[[self contactPhone] text] forKey:@"contactPhone"];
+    [newLocation setValue:[[self contactWebsite] text] forKey:@"contactWebsite"];
+    
     
     
     // Save the object to persistent store.
@@ -326,7 +451,7 @@
     // Pass the selected object to the new view controller.
     if ([[segue identifier] isEqualToString:@"ReturnInput"])
     {
-        if ([self.descField.text length])
+/*        if ([self.descField.text length])
         {
             GTDataManager *dataManager = [GTDataManager getInstance];
             
@@ -336,7 +461,7 @@
                   withCreatedTime:self.location.timestamp];
             
         }
-        
+*/        
     }
 }
  
