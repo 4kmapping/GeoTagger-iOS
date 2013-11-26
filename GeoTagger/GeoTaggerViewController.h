@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
-@class GTDataController;
-@class GTData;
+
 
 @interface GeoTaggerViewController : UIViewController
     <CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate>
@@ -22,8 +21,14 @@
 
 }
 
-@property (strong, nonatomic) GTDataController *dataController;
+
 @property (nonatomic) NSManagedObject *currLocation;
+
+// Indicator that tells if previous choice was offline mode.
+// If this vlaue is not NULL, the previous choice was offline mode.
+// It itself is a pointer to UserLocationMap and will be used to put the view
+//   back to view controller.
+@property (strong, nonatomic) UIView *removedUserMapView;
 
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error;

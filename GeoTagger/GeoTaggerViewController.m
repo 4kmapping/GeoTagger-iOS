@@ -9,16 +9,24 @@
 #import "GeoTaggerViewController.h"
 #import "GTMapPoint.h"
 #import "GTFormViewController.h"
-#import "GTDataController.h"
-#import "GTDetailViewController.h"
-#import "GTData.h"
 #import "GTDataManager.h"
+#import "GTSettings.h"
 
 @interface GeoTaggerViewController ()
 
 @end
 
 @implementation GeoTaggerViewController
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    NSLog(@"called view will appear" );
+    [self viewDidLoad];
+    
+}
+
 
 - (void)viewDidLoad
 {
@@ -27,7 +35,53 @@
     // ***
     // Set a map type to Satellite view.
     //[worldView setMapType:MKMapTypeSatellite];
-    [worldView setShowsUserLocation:YES];
+    
+    GTSettings *settings = [GTSettings getInstance];
+    
+    if (settings.isOffline)
+    {
+        [worldView setShowsUserLocation:NO];
+        
+        for ( id view in self.view.subviews)
+        {
+            if ([((UIView *)view).restorationIdentifier isEqualToString:@"UserLocationMap"] )
+            {
+                // Disable MapView
+                self.removedUserMapView = view;
+                
+                [((UIView *)view) removeFromSuperview];
+                
+                // Display offline mode message.
+                UILabel *mssgLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,100,self.view.frame.size.width-40,200)];
+                mssgLabel.textAlignment = NSTextAlignmentCenter;
+                mssgLabel.textColor = [UIColor redColor];
+                mssgLabel.backgroundColor = [UIColor whiteColor];
+                mssgLabel.numberOfLines = 5;
+                mssgLabel.adjustsFontSizeToFitWidth = YES;
+                mssgLabel.text = @"You are in offline mode.\n No map will be displayed. \n \n ";
+                mssgLabel.text = [mssgLabel.text stringByAppendingString:@"Still You CAN add new data.\n Click Add button above."];
+                
+                [self.view addSubview:mssgLabel];
+                
+            }
+        }
+        
+    }
+    else
+    {
+        [worldView setShowsUserLocation:YES];
+        
+        // If no UserLocationMap exists in subview array, put it back to display the map view.
+        if (self.removedUserMapView != NULL)
+        {
+            [self.view addSubview:worldView];
+            [self setRemovedUserMapView:NULL];
+        }
+        
+    }
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,8 +102,7 @@
         [locationManager setDelegate:self];
         [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
         [locationManager startUpdatingLocation];
-        
-        self.dataController = [[GTDataController alloc] init];
+
     }
 
 }
@@ -242,11 +295,6 @@
         [formController setLocationToDisplay:NULL];
     }
     
-    if ([[segue identifier] isEqualToString:@"DetailViewSegue"])
-    {
-        GTDetailViewController *detailController = [segue destinationViewController];
-        [detailController setLocation:self.currLocation];
-    }
 }
 
 

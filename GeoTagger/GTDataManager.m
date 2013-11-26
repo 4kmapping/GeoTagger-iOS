@@ -7,7 +7,7 @@
 //
 
 #import "GTDataManager.h"
-#import "GTData.h"
+//#import "GTData.h"
 
 @implementation GTDataManager
 

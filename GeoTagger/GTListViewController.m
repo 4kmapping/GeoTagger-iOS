@@ -8,7 +8,6 @@
 
 #import "GTListViewController.h"
 #import "GTDataManager.h"
-#import "GTDetailViewController.h"
 #import "GTFormViewController.h"
 
 

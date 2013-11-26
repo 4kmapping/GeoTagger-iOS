@@ -7,7 +7,6 @@
 //
 
 #import "GTFormViewController.h"
-#import "GTData.h"
 #import "GTDataManager.h"
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>

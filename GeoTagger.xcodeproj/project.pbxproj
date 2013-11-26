@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AB597A0617F6326B00970F95 /* GTFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB597A0517F6326B00970F95 /* GTFormViewController.m */; };
-		AB597A0917F6436500970F95 /* GTData.m in Sources */ = {isa = PBXBuildFile; fileRef = AB597A0817F6436500970F95 /* GTData.m */; };
-		AB597A0C17F646CC00970F95 /* GTDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB597A0B17F646CC00970F95 /* GTDataController.m */; };
 		ABA8BCB217FB687400245158 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA8BCB117FB687400245158 /* CoreData.framework */; };
 		ABA8BCB517FB68FE00245158 /* GTDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA8BCB417FB68FE00245158 /* GTDataManager.m */; };
 		ABD0461517F513CD00C0B201 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD0461417F513CD00C0B201 /* Foundation.framework */; };
@@ -31,7 +29,8 @@
 		ABD0469317F5244700C0B201 /* GTMapPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD0469217F5244700C0B201 /* GTMapPoint.m */; };
 		ABE17C6917FD0B4D0090C95F /* GTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE17C6817FD0B4D0090C95F /* GTListViewController.m */; };
 		ABE3AFDB183C545B0034319B /* GeoTagger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABE3AFD9183C545B0034319B /* GeoTagger.xcdatamodeld */; };
-		ABEB4F8017F94ECF00DE0209 /* GTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABEB4F7F17F94ECF00DE0209 /* GTDetailViewController.m */; };
+		ABEF592B183EE61000EA2170 /* GTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABEF592A183EE61000EA2170 /* GTSettingsViewController.m */; };
+		ABEF592E183EE8C800EA2170 /* GTSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = ABEF592D183EE8C800EA2170 /* GTSettings.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,10 +46,6 @@
 /* Begin PBXFileReference section */
 		AB597A0417F6326B00970F95 /* GTFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTFormViewController.h; sourceTree = "<group>"; };
 		AB597A0517F6326B00970F95 /* GTFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTFormViewController.m; sourceTree = "<group>"; };
-		AB597A0717F6436500970F95 /* GTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTData.h; sourceTree = "<group>"; };
-		AB597A0817F6436500970F95 /* GTData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTData.m; sourceTree = "<group>"; };
-		AB597A0A17F646CC00970F95 /* GTDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDataController.h; sourceTree = "<group>"; };
-		AB597A0B17F646CC00970F95 /* GTDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDataController.m; sourceTree = "<group>"; };
 		ABA8BCB117FB687400245158 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		ABA8BCB317FB68FE00245158 /* GTDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDataManager.h; sourceTree = "<group>"; };
 		ABA8BCB417FB68FE00245158 /* GTDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDataManager.m; sourceTree = "<group>"; };
@@ -80,8 +75,10 @@
 		ABE17C6717FD0B4D0090C95F /* GTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTListViewController.h; sourceTree = "<group>"; };
 		ABE17C6817FD0B4D0090C95F /* GTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTListViewController.m; sourceTree = "<group>"; };
 		ABE3AFDA183C545B0034319B /* GeoTagger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GeoTagger.xcdatamodel; sourceTree = "<group>"; };
-		ABEB4F7E17F94ECF00DE0209 /* GTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDetailViewController.h; sourceTree = "<group>"; };
-		ABEB4F7F17F94ECF00DE0209 /* GTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDetailViewController.m; sourceTree = "<group>"; };
+		ABEF5929183EE61000EA2170 /* GTSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTSettingsViewController.h; sourceTree = "<group>"; };
+		ABEF592A183EE61000EA2170 /* GTSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTSettingsViewController.m; sourceTree = "<group>"; };
+		ABEF592C183EE8C800EA2170 /* GTSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTSettings.h; sourceTree = "<group>"; };
+		ABEF592D183EE8C800EA2170 /* GTSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTSettings.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,19 +144,17 @@
 		ABD0461A17F513CD00C0B201 /* GeoTagger */ = {
 			isa = PBXGroup;
 			children = (
+				ABEF592C183EE8C800EA2170 /* GTSettings.h */,
+				ABEF592D183EE8C800EA2170 /* GTSettings.m */,
+				ABEF5929183EE61000EA2170 /* GTSettingsViewController.h */,
+				ABEF592A183EE61000EA2170 /* GTSettingsViewController.m */,
 				ABE3AFD9183C545B0034319B /* GeoTagger.xcdatamodeld */,
 				ABD0462317F513CD00C0B201 /* GeoTaggerAppDelegate.h */,
 				ABD0462417F513CD00C0B201 /* GeoTaggerAppDelegate.m */,
 				ABD0462917F513CD00C0B201 /* GeoTaggerViewController.h */,
 				ABD0462A17F513CD00C0B201 /* GeoTaggerViewController.m */,
-				AB597A0717F6436500970F95 /* GTData.h */,
-				AB597A0817F6436500970F95 /* GTData.m */,
-				AB597A0A17F646CC00970F95 /* GTDataController.h */,
-				AB597A0B17F646CC00970F95 /* GTDataController.m */,
 				ABA8BCB317FB68FE00245158 /* GTDataManager.h */,
 				ABA8BCB417FB68FE00245158 /* GTDataManager.m */,
-				ABEB4F7E17F94ECF00DE0209 /* GTDetailViewController.h */,
-				ABEB4F7F17F94ECF00DE0209 /* GTDetailViewController.m */,
 				AB597A0417F6326B00970F95 /* GTFormViewController.h */,
 				AB597A0517F6326B00970F95 /* GTFormViewController.m */,
 				ABE17C6717FD0B4D0090C95F /* GTListViewController.h */,
@@ -300,17 +295,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABEF592B183EE61000EA2170 /* GTSettingsViewController.m in Sources */,
 				ABE3AFDB183C545B0034319B /* GeoTagger.xcdatamodeld in Sources */,
-				ABEB4F8017F94ECF00DE0209 /* GTDetailViewController.m in Sources */,
 				ABE17C6917FD0B4D0090C95F /* GTListViewController.m in Sources */,
-				AB597A0917F6436500970F95 /* GTData.m in Sources */,
 				ABD0462B17F513CD00C0B201 /* GeoTaggerViewController.m in Sources */,
 				ABD0462517F513CD00C0B201 /* GeoTaggerAppDelegate.m in Sources */,
 				ABD0469317F5244700C0B201 /* GTMapPoint.m in Sources */,
 				ABA8BCB517FB68FE00245158 /* GTDataManager.m in Sources */,
 				AB597A0617F6326B00970F95 /* GTFormViewController.m in Sources */,
+				ABEF592E183EE8C800EA2170 /* GTSettings.m in Sources */,
 				ABD0462117F513CD00C0B201 /* main.m in Sources */,
-				AB597A0C17F646CC00970F95 /* GTDataController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
