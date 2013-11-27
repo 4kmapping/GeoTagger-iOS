@@ -7,7 +7,7 @@
 //
 
 #import "GTDataManager.h"
-//#import "GTData.h"
+#import "GTSettings.h"
 
 @implementation GTDataManager
 
@@ -136,6 +136,96 @@
     return newLocation;
 
 }
+
+
+# pragma mark NSURLConnection Delegate Methods
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    // A response has been received, this is where we initialize the instance var you created
+    // so that we can append data to it in the didReceiveData method
+    // Furthermore, this method is called each time there is a redirect so reinitializing it
+    // also serves to clear it
+    _responseData = [[NSMutableData alloc] init];
+    
+    NSLog(@"didReceivedResponse was hit");
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    // Append the new data to the instance variable you declared
+    [_responseData appendData:data];
+}
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
+                  willCacheResponse:(NSCachedURLResponse*)cachedResponse
+{
+    // Return nil to indicate not necessary to store a cached response for this connection
+    return nil;
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    // The request is complete and data has been received
+    // You can parse the stuff in your instance variable now
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    // The request has failed for some reason!
+    // Check the error var
+    NSLog(@"didFailWithError was hit: %@", error);
+}
+
+
+
+# pragma Location data synchronization
+
+- (void)syncWithLocation:(NSManagedObject *)location
+{
+    GTSettings *settings = [GTSettings getInstance];
+    NSString *jsonStr = [self convertToJsonFromObject:location];
+    
+    NSURL *url = [NSURL URLWithString:[settings hostURL]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"POST";
+    [request setHTTPBody:jsonStr];
+    
+    [[NSURLConnection alloc] initWithRequest:request delegate:self] ;
+    
+}
+
+
+# pragma Helper methods
+
+- (NSString *)convertToJsonFromObject:(NSManagedObject *)obj
+{
+    NSEntityDescription *entity = [obj entity];
+    NSDictionary *attributes = [entity attributesByName];
+    NSArray *keys = attributes.allKeys;
+    
+    NSDictionary *dict = [obj dictionaryWithValuesForKeys:keys] ;
+    
+    NSError *error;
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
+    
+    NSString *jsonStr;
+    
+    if(!jsonData)
+    {
+        NSLog(@"JSON Error: %@", error);
+    }
+    else
+    {
+        NSString *jsonStr = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
+        //NSLog(@"JSON OUTOUT: %@", jsonStr);
+    }
+    
+    return jsonStr;
+}
+
 
 
 @end

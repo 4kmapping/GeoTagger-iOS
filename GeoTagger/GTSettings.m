@@ -20,6 +20,9 @@ static GTSettings *instance = nil;
         {
             instance = [GTSettings new];
             [instance setIsOffline:NO];
+            
+            // TODO: REMOVE THIS SETTING. This is for dev only.
+            [instance setHostURL:@"https://192.237.166.7/api/0.1/location/"];
         }
     }
     

@@ -6,11 +6,14 @@
 //  Copyright (c) 2013 msk. All rights reserved.
 //
 
-#import "GTFormViewController.h"
-#import "GTDataManager.h"
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
 #import <CoreLocation/CLLocation.h>
+#import "GTFormViewController.h"
+#import "GTDataManager.h"
+#import "GTSettings.h"
+
+
 
 @interface GTFormViewController ()
 
@@ -214,7 +217,8 @@
 }
 
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     
@@ -315,11 +319,6 @@
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)sender
 {
-//    if (sender == self.tagsField | sender == self.contactEmail | sender == self.)
-//    {
-//        [sender resignFirstResponder];
-//    }
-    NSLog(@"return key hit");
     [sender resignFirstResponder];
     
     return YES;
@@ -443,6 +442,13 @@
     if (![context save:&error])
     {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+    
+    // Sync this data with a server
+    GTSettings *settings = [GTSettings getInstance];
+    if (!settings.isOffline)
+    {
+        [dataManager syncWithLocation:newLocation];
     }
     
 }

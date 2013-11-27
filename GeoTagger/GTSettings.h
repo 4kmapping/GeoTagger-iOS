@@ -13,6 +13,7 @@
 }
 
 @property (nonatomic) BOOL isOffline;
+@property (nonatomic, strong) NSString *hostURL;
 
 + (GTSettings *)getInstance;
 

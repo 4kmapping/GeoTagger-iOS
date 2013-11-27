@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 @class GTData;
 
-@interface GTDataManager : NSObject
+@interface GTDataManager : NSObject <NSURLConnectionDelegate>
+{
+    NSMutableData *_responseData;
+}
 
 + (GTDataManager *)getInstance;
 
@@ -23,5 +26,8 @@
                       withLon:(double)longitude
               withCreatedTime:(NSDate *)date;
 
+- (void)syncWithLocation:(NSManagedObject *)location;
+
+- (NSDictionary *)convertToJsonFromObject:(NSManagedObject *)obj;
 
 @end
