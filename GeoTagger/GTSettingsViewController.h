@@ -10,6 +10,10 @@
 
 @interface GTSettingsViewController : UIViewController
 
+
+@property (strong, nonatomic) IBOutlet UITextField *hostName;
+
+
 - (IBAction)changeOfflinemode:(id)sender;
 
 

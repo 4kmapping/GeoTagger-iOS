@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13A603" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Location" syncable="YES">
+    <entity name="Location" representedClassName="Location" syncable="YES">
         <attribute name="artsType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="bibleStudyType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="campusType" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -18,7 +18,6 @@
         <attribute name="healthcareType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="hospitalType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="indigenousType" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="isSynced" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="mediaType" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -28,14 +27,22 @@
         <attribute name="prisonType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="prostitutesType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="researchType" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="syncTime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="trainType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="urbanType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="womenType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="youthType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="locationSync" maxCount="1" deletionRule="Nullify" destinationEntity="Sync" inverseName="syncLocation" inverseEntity="Sync" syncable="YES"/>
+    </entity>
+    <entity name="Sync" representedClassName="Sync" syncable="YES">
+        <attribute name="isDataSynced" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isPhoto" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isPhotoSynced" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lastSyncTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="syncLocation" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="locationSync" inverseEntity="Location" syncable="YES"/>
     </entity>
     <elements>
         <element name="Location" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Sync" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

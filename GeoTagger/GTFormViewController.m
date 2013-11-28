@@ -12,7 +12,8 @@
 #import "GTFormViewController.h"
 #import "GTDataManager.h"
 #import "GTSettings.h"
-
+#import "Location.h"
+#import "Sync.h"
 
 
 @interface GTFormViewController ()
@@ -361,47 +362,32 @@
     
     NSManagedObjectContext *context = [dataManager managedObjectContext];
     // Create a new managed object
-    NSManagedObject *newLocation = [NSEntityDescription insertNewObjectForEntityForName:@"Location"
+    Location *newLocation = [NSEntityDescription insertNewObjectForEntityForName:@"Location"
                                                                  inManagedObjectContext:context];
+    Sync *sync = [NSEntityDescription insertNewObjectForEntityForName:@"Sync"
+                                               inManagedObjectContext:context];
+    
+    // Set initial values for a Sync instance for Location
+    sync.isPhoto = NO;
+    sync.isDataSynced = NO;
+    sync.isPhotoSynced = NO;
+    
+    newLocation.locationSync = sync;
+    
     
     // Save location info.
     CLLocationCoordinate2D coordinate = [[self location] coordinate];
     
-    NSLog(@"latitude: %f", coordinate.latitude);
-    
+    /*
     [newLocation setValue:[NSNumber numberWithDouble:coordinate.latitude] forKey:@"latitude"];
     [newLocation setValue:[NSNumber numberWithDouble:coordinate.longitude] forKey:@"longitude"];
+    */
+    newLocation.latitude = [NSNumber numberWithDouble:coordinate.latitude];
+    newLocation.longitude = [NSNumber numberWithDouble:coordinate.longitude];
+    
     
     // Save timestamp
-    [newLocation setValue:[NSNumber numberWithDouble:timestamp] forKey:@"created"];
-    
-    // Store a photo
-    if(self.imageView.image)
-    {
-        
-        // Save the selected (taken) image to a file and folder
-        NSData *pngData = UIImagePNGRepresentation(self.imageView.image);
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
-        
-        // Set folder path for photo. If no photo folder existing yet, create one.
-        NSString *folderPath = [documentsPath stringByAppendingPathComponent:@"/photo"]; //Add the file name
-        NSError *error = [[NSError alloc] init];
-        if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath])
-            [[NSFileManager defaultManager] createDirectoryAtPath:folderPath
-                                      withIntermediateDirectories:NO
-                                                       attributes:nil
-                                                            error:&error]; //Create folder
-        NSString *photoid = [NSString stringWithFormat:@"%f.png", timestamp];
-        
-        NSString *filePath = [folderPath stringByAppendingPathComponent:photoid];
-        
-        [pngData writeToFile:filePath atomically:YES]; //Write the file
-        
-        [newLocation setValue:photoid forKey:@"photoId"];
-   
-    }
-
+    newLocation.created = [NSNumber numberWithDouble:timestamp];
     
     // Save checklist and other text fields.
     
@@ -436,20 +422,79 @@
     [newLocation setValue:[[self contactPhone] text] forKey:@"contactPhone"];
     [newLocation setValue:[[self contactWebsite] text] forKey:@"contactWebsite"];
     
-    // Save the object to persistent store.
+    // Store a photo
+    //
+    
+    NSData *pngData = UIImagePNGRepresentation(self.imageView.image);
+    
+    if(self.imageView.image)
+    {
+        
+        // Save the selected (taken) image to a file and folder
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+        
+        // Set folder path for photo. If no photo folder existing yet, create one.
+        NSString *folderPath = [documentsPath stringByAppendingPathComponent:@"/photo"]; //Add the file name
+        NSError *error = [[NSError alloc] init];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath])
+            [[NSFileManager defaultManager] createDirectoryAtPath:folderPath
+                                      withIntermediateDirectories:NO
+                                                       attributes:nil
+                                                            error:&error]; //Create folder
+        NSString *photoid = [NSString stringWithFormat:@"%f.png", timestamp];
+        
+        NSString *filePath = [folderPath stringByAppendingPathComponent:photoid];
+        
+        [pngData writeToFile:filePath atomically:YES]; //Write the file
+        
+        [newLocation setValue:photoid forKey:@"photoId"];
+        
+        // Mark that location has an associated photo.
+        sync.isPhoto = [NSNumber numberWithBool:YES];
+        
+    }
+    
+
+    // Save the object's initial status to persistent store.
     //
     NSError *error = nil;
     if (![context save:&error])
     {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
+
     
     // Sync this data with a server
     GTSettings *settings = [GTSettings getInstance];
     if (!settings.isOffline)
     {
-        [dataManager syncWithLocation:newLocation];
+        
+        // Sync data
+        int statusCode = [dataManager syncWithLocation:newLocation];
+        if (statusCode >= 200 && statusCode < 300) // sync was successful.
+        {
+            sync.isDataSynced = @YES;
+        }
+        
+        // Sync photo
+        statusCode = [dataManager syncWithLocPhoto:pngData photoId:newLocation.photoId];
+        if (statusCode >= 200 && statusCode < 300) // sync was successful.
+        {
+            sync.isPhotoSynced = @YES;
+        }
+        
     }
+
+    
+    // Save the object's updated status to persistent store.
+    //
+    error = nil;
+    if (![context save:&error])
+    {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+    
     
 }
 

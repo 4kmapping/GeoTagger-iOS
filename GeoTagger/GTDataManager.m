@@ -138,62 +138,155 @@
 }
 
 
-# pragma mark NSURLConnection Delegate Methods
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    // A response has been received, this is where we initialize the instance var you created
-    // so that we can append data to it in the didReceiveData method
-    // Furthermore, this method is called each time there is a redirect so reinitializing it
-    // also serves to clear it
-    _responseData = [[NSMutableData alloc] init];
-    
-    NSLog(@"didReceivedResponse was hit");
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    // Append the new data to the instance variable you declared
-    [_responseData appendData:data];
-}
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
-                  willCacheResponse:(NSCachedURLResponse*)cachedResponse
-{
-    // Return nil to indicate not necessary to store a cached response for this connection
-    return nil;
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    // The request is complete and data has been received
-    // You can parse the stuff in your instance variable now
-    
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    // The request has failed for some reason!
-    // Check the error var
-    NSLog(@"didFailWithError was hit: %@", error);
-}
-
-
-
 # pragma Location data synchronization
 
-- (void)syncWithLocation:(NSManagedObject *)location
+- (int)syncWithLocation:(NSManagedObject *)location
 {
     GTSettings *settings = [GTSettings getInstance];
-    NSString *jsonStr = [self convertToJsonFromObject:location];
-    
+    NSString *jsonStr = [self convertToJsonFromObject:location]; 
     NSURL *url = [NSURL URLWithString:[settings hostURL]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    NSLog(@"I am here");
+    
+    // Set headers
+    NSMutableDictionary * headers = [[NSMutableDictionary alloc] init];
+    NSString *appkeyStr = [NSString stringWithFormat:@"ApiKey %@:%@", settings.username, settings.appkey];
+    [headers setObject:appkeyStr forKey:@"Authorization"];
+    [headers setObject:@"application/json" forKey:@"Accept"];
+    
+    [request setAllHTTPHeaderFields:headers];
+    
     request.HTTPMethod = @"POST";
-    [request setHTTPBody:jsonStr];
+    //[request setHTTPBody:jsonStr];
+    [request setHTTPBody:@" "];
     
-    [[NSURLConnection alloc] initWithRequest:request delegate:self] ;
+    NSHTTPURLResponse *responseCode = nil;
+    NSError *error = nil;
     
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+
+    NSLog(@"json data is: %@", jsonStr);
+    
+    NSLog(@"syncing location status code is: %d", [responseCode statusCode]);
+    
+    NSLog(@"Can't sync with a server! %@ %@", error, [error localizedDescription]);
+    
+    return [responseCode statusCode];
+}
+
+
+- (int)syncWithLocPhoto:(NSData *)photoData photoId:(NSString *)photoId
+{
+
+    /*
+    GTSettings *settings = [GTSettings getInstance];
+    NSURL *url = [NSURL URLWithString:[settings hostURL]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    // Set headers
+    NSMutableDictionary * headers = [[NSMutableDictionary alloc] init];
+    [headers setObject:@"ApiKey tester:1a2b3c4d5e" forKey:@"Authorization"];
+    [headers setObject:@"multipart/form-data" forKey:@"Content-Type"];
+    [request setAllHTTPHeaderFields:headers];
+    
+    [request setTimeoutInterval:30];
+    
+    request.HTTPMethod = @"POST";
+    [request setHTTPBody:photoData];
+    
+    NSHTTPURLResponse *responseCode = nil;
+    NSError *error = nil;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+    
+    NSLog(@"syncing photo status code is: %d", [responseCode statusCode]);
+    
+    return [responseCode statusCode];
+    */
+    
+    // >>>>>>>
+
+    // create request
+    GTSettings *settings = [GTSettings getInstance];
+    NSURL *url = [NSURL URLWithString:[settings hostURL]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    // Set headers
+    NSMutableDictionary * headers = [[NSMutableDictionary alloc] init];
+    
+    NSString *appkeyStr = [NSString stringWithFormat:@"ApiKey %@:%@", settings.username, settings.appkey];
+    [headers setObject:appkeyStr forKey:@"Authorization"];
+    [headers setObject:@"multipart/form-data" forKey:@"Content-Type"];
+    [request setAllHTTPHeaderFields:headers];
+    
+    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [request setHTTPShouldHandleCookies:NO];
+    [request setTimeoutInterval:30];
+    [request setHTTPMethod:@"POST"];
+    
+    // Dictionary that holds post parameters. You can set your post parameters that your server accepts or programmed to accept.
+    NSMutableDictionary* _params = [[NSMutableDictionary alloc] init];
+    [_params setObject:settings.username forKey:@"username"];
+    
+    // the boundary string : a random string, that will not repeat in post data, to separate post data fields.
+    NSString *boundaryConstant = @"----------V4xnHDg04ehbqgZCaMO5jx";
+    
+    // set Content-Type in HTTP header
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundaryConstant];
+    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    // post body
+    NSMutableData *body = [NSMutableData data];
+    
+    // add params (all params are strings)
+    for (NSString *param in _params) {
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", param] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"%@\r\n", [_params objectForKey:param]] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    // add image data
+    if (photoData) {
+        
+        NSString *picParamName = @"pic";
+        
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", picParamName, photoId] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Type: image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:photoData];
+        [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // setting the body of the post to the reqeust
+    [request setHTTPBody:body];
+    
+    // set the content-length
+    NSString *postLength = [NSString stringWithFormat:@"%d", [body length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    // set URL
+    [request setURL:url];
+    
+    NSHTTPURLResponse *responseCode = nil;
+    NSError *error = nil;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+    
+    NSLog(@"syncing photo status code is: %d", [responseCode statusCode]);
+    
+    return [responseCode statusCode];
+    
+}
+
+
+- (int)syncWithLocPhotoId: (NSString *)photoId
+{
+    
+    return 0;
 }
 
 
@@ -219,8 +312,8 @@
     }
     else
     {
-        NSString *jsonStr = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
-        //NSLog(@"JSON OUTOUT: %@", jsonStr);
+        jsonStr = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
+        NSLog(@"JSON OUTOUT: %@", jsonStr);
     }
     
     return jsonStr;

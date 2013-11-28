@@ -13,7 +13,10 @@
 }
 
 @property (nonatomic) BOOL isOffline;
+@property (nonatomic, strong) NSString *hostName;
 @property (nonatomic, strong) NSString *hostURL;
+@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) NSString *appkey;
 
 + (GTSettings *)getInstance;
 

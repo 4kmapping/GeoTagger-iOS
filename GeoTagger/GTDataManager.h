@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @class GTData;
 
-@interface GTDataManager : NSObject <NSURLConnectionDelegate>
+@interface GTDataManager : NSObject 
 {
     NSMutableData *_responseData;
 }
@@ -26,8 +26,11 @@
                       withLon:(double)longitude
               withCreatedTime:(NSDate *)date;
 
-- (void)syncWithLocation:(NSManagedObject *)location;
+- (int)syncWithLocation:(NSManagedObject *)location;
 
-- (NSDictionary *)convertToJsonFromObject:(NSManagedObject *)obj;
+- (int)syncWithLocPhoto:(NSData *)photoData photoId:(NSString *)photoId;
+- (int)syncWithLocPhoto:(NSData *)photoDataId;
+
+- (NSString *)convertToJsonFromObject:(NSManagedObject *)obj;
 
 @end
