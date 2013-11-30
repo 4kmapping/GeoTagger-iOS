@@ -351,7 +351,7 @@
 - (IBAction)save:(id)sender
 {
     double timestamp = [[NSDate date] timeIntervalSince1970];
-    
+    NSDate *currDate = [NSDate dateWithTimeIntervalSince1970:timestamp];
     
     [[self presentingViewController] dismissViewControllerAnimated:YES
                                                         completion:nil];
@@ -387,7 +387,7 @@
     
     
     // Save timestamp
-    newLocation.created = [NSNumber numberWithDouble:timestamp];
+    newLocation.created = [currDate description];
     
     // Save checklist and other text fields.
     

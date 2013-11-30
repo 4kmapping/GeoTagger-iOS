@@ -8,6 +8,7 @@
 
 #import "GTDataManager.h"
 #import "GTSettings.h"
+#import "Location.h"
 
 @implementation GTDataManager
 
@@ -112,26 +113,12 @@
     [newLocation setValue:[NSNumber numberWithDouble:longitude] forKey:@"longitude"];
     [newLocation setValue:[date description] forKey:@"created"];
     
-    NSLog(@"Before saving, object id of new location is: %@ <<", [newLocation objectID]);
-    
-    
     NSError *error = nil;
     // Save the object to persistent store.
     if (![context save:&error])
     {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
-
-    NSLog(@"After saving, object id of new location is: %@ <<", [newLocation objectID]);
-
-    /*
-    [newLocation setValue:[[newLocation objectID] description ] forKey:@"uuid"];
-    
-    if (![context save:&error])
-    {
-        NSLog(@"Can't update with object id! %@ %@", error, [error localizedDescription]);
-    }
-    */
     
     return newLocation;
 
@@ -154,12 +141,12 @@
     NSString *appkeyStr = [NSString stringWithFormat:@"ApiKey %@:%@", settings.username, settings.appkey];
     [headers setObject:appkeyStr forKey:@"Authorization"];
     [headers setObject:@"application/json" forKey:@"Accept"];
+    [headers setObject:@"application/json" forKey:@"Content-Type"];
     
     [request setAllHTTPHeaderFields:headers];
     
     request.HTTPMethod = @"POST";
-    //[request setHTTPBody:jsonStr];
-    [request setHTTPBody:@" "];
+    [request setHTTPBody:[jsonStr dataUsingEncoding:NSUTF8StringEncoding]];
     
     NSHTTPURLResponse *responseCode = nil;
     NSError *error = nil;
@@ -167,9 +154,7 @@
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
 
     NSLog(@"json data is: %@", jsonStr);
-    
     NSLog(@"syncing location status code is: %d", [responseCode statusCode]);
-    
     NSLog(@"Can't sync with a server! %@ %@", error, [error localizedDescription]);
     
     return [responseCode statusCode];
@@ -298,7 +283,16 @@
     NSDictionary *attributes = [entity attributesByName];
     NSArray *keys = attributes.allKeys;
     
-    NSDictionary *dict = [obj dictionaryWithValuesForKeys:keys] ;
+    NSDictionary *dict = [[obj dictionaryWithValuesForKeys:keys] mutableCopy];
+    
+    NSArray *booleanTypeList = [Location getBooleanTypeList];
+    
+    // Substitute 0/1 to true/false for boolean values
+    for (NSString *key in booleanTypeList)
+    {
+        int value = [dict[key] intValue];
+        [dict setValue:[NSNumber numberWithBool:value] forKey:key];
+    }
     
     NSError *error;
     
@@ -313,7 +307,6 @@
     else
     {
         jsonStr = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
-        NSLog(@"JSON OUTOUT: %@", jsonStr);
     }
     
     return jsonStr;

@@ -45,4 +45,35 @@
 @dynamic youthType;
 @dynamic locationSync;
 
++ (NSArray *)getBooleanTypeList
+{
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    
+    [list addObject:@"artsType"];
+    [list addObject:@"bibleStudyType"];
+    [list addObject:@"campusType"];
+    [list addObject:@"churchPlantingType"];
+    [list addObject:@"communityDevType"];
+    [list addObject:@"constructionType"];
+    [list addObject:@"counselingType"];
+    [list addObject:@"contactConfirmed"];
+    [list addObject:@"evanType"];
+    [list addObject:@"healthcareType"];
+    [list addObject:@"hospitalType"];
+    [list addObject:@"indigenousType"];
+    [list addObject:@"mediaType"];
+    [list addObject:@"mercyType"];
+    [list addObject:@"orphansType"];
+    [list addObject:@"prisonType"];
+    [list addObject:@"prostitutesType"];
+    [list addObject:@"researchType"];
+    [list addObject:@"trainType"];
+    [list addObject:@"urbanType"];
+    [list addObject:@"womenType"];
+    [list addObject:@"youthType"];
+    
+    return list;
+}
+
+
 @end

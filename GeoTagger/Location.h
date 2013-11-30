@@ -24,7 +24,7 @@
 @property (nonatomic, retain) NSString * contactPhone;
 @property (nonatomic, retain) NSString * contactWebsite;
 @property (nonatomic, retain) NSNumber * counselingType;
-@property (nonatomic, retain) NSNumber * created;
+@property (nonatomic, retain) NSString * created;
 @property (nonatomic, retain) NSString * desc;
 @property (nonatomic, retain) NSNumber * evanType;
 @property (nonatomic, retain) NSNumber * healthcareType;
@@ -45,5 +45,7 @@
 @property (nonatomic, retain) NSNumber * womenType;
 @property (nonatomic, retain) NSNumber * youthType;
 @property (nonatomic, retain) Sync *locationSync;
+
++ (NSArray *)getBooleanTypeList;
 
 @end

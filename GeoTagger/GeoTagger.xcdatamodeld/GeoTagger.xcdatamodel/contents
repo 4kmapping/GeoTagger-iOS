@@ -12,7 +12,7 @@
         <attribute name="contactPhone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contactWebsite" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="counselingType" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="created" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="evanType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="healthcareType" optional="YES" attributeType="Boolean" syncable="YES"/>
