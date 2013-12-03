@@ -45,6 +45,8 @@
 @dynamic youthType;
 @dynamic locationSync;
 
+@dynamic dataId;
+
 + (NSArray *)getBooleanTypeList
 {
     NSMutableArray *list = [[NSMutableArray alloc] init];

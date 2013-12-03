@@ -15,6 +15,7 @@
 @property (nonatomic) BOOL isOffline;
 @property (nonatomic, strong) NSString *hostName;
 @property (nonatomic, strong) NSString *hostURL;
+@property (nonatomic, strong) NSString *hostPhotoURL;
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *appkey;
 

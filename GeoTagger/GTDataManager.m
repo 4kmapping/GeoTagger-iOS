@@ -134,8 +134,6 @@
     NSURL *url = [NSURL URLWithString:[settings hostURL]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
-    NSLog(@"I am here");
-    
     // Set headers
     NSMutableDictionary * headers = [[NSMutableDictionary alloc] init];
     NSString *appkeyStr = [NSString stringWithFormat:@"ApiKey %@:%@", settings.username, settings.appkey];
@@ -153,119 +151,107 @@
     
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
 
+    /* For Debugging */
     NSLog(@"json data is: %@", jsonStr);
     NSLog(@"syncing location status code is: %d", [responseCode statusCode]);
     NSLog(@"Can't sync with a server! %@ %@", error, [error localizedDescription]);
     
+    
     return [responseCode statusCode];
 }
 
 
-- (int)syncWithLocPhoto:(NSData *)photoData photoId:(NSString *)photoId
-{
 
-    /*
-    GTSettings *settings = [GTSettings getInstance];
-    NSURL *url = [NSURL URLWithString:[settings hostURL]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    
-    // Set headers
-    NSMutableDictionary * headers = [[NSMutableDictionary alloc] init];
-    [headers setObject:@"ApiKey tester:1a2b3c4d5e" forKey:@"Authorization"];
-    [headers setObject:@"multipart/form-data" forKey:@"Content-Type"];
-    [request setAllHTTPHeaderFields:headers];
-    
-    [request setTimeoutInterval:30];
-    
-    request.HTTPMethod = @"POST";
-    [request setHTTPBody:photoData];
-    
-    NSHTTPURLResponse *responseCode = nil;
-    NSError *error = nil;
-    
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
-    
-    NSLog(@"syncing photo status code is: %d", [responseCode statusCode]);
-    
-    return [responseCode statusCode];
-    */
-    
-    // >>>>>>>
+ - (int)syncWithLocPhoto:(NSData *)photoData photoId:(NSString *)photoId
+{
 
     // create request
     GTSettings *settings = [GTSettings getInstance];
-    NSURL *url = [NSURL URLWithString:[settings hostURL]];
-    
+    NSURL *url = [NSURL URLWithString:[settings hostPhotoURL]];
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setTimeoutInterval:20];
     
     // Set headers
     NSMutableDictionary * headers = [[NSMutableDictionary alloc] init];
-    
+
     NSString *appkeyStr = [NSString stringWithFormat:@"ApiKey %@:%@", settings.username, settings.appkey];
     [headers setObject:appkeyStr forKey:@"Authorization"];
-    [headers setObject:@"multipart/form-data" forKey:@"Content-Type"];
+    [headers setObject:@"application/json" forKey:@"Content-Type"];
     [request setAllHTTPHeaderFields:headers];
-    
+
     [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
     [request setHTTPShouldHandleCookies:NO];
     [request setTimeoutInterval:30];
     [request setHTTPMethod:@"POST"];
-    
+
     // Dictionary that holds post parameters. You can set your post parameters that your server accepts or programmed to accept.
     NSMutableDictionary* _params = [[NSMutableDictionary alloc] init];
     [_params setObject:settings.username forKey:@"username"];
-    
+
     // the boundary string : a random string, that will not repeat in post data, to separate post data fields.
     NSString *boundaryConstant = @"----------V4xnHDg04ehbqgZCaMO5jx";
-    
+
     // set Content-Type in HTTP header
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundaryConstant];
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
-    
+    [request setValue:@"multipart/form-data" forHTTPHeaderField:@"enctype"];
+
     // post body
     NSMutableData *body = [NSMutableData data];
-    
+
     // add params (all params are strings)
-    for (NSString *param in _params) {
+    for (NSString *param in _params)
+    {
         [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", param] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[[NSString stringWithFormat:@"%@\r\n", [_params objectForKey:param]] dataUsingEncoding:NSUTF8StringEncoding]];
     }
-    
+
     // add image data
-    if (photoData) {
-        
+    if (photoData)
+    {
+    
         NSString *picParamName = @"pic";
-        
+    
         [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", picParamName, photoId] dataUsingEncoding:NSUTF8StringEncoding]];
+        //[body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; \r\n", picParamName] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[@"Content-Type: image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:photoData];
         [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+        NSString *dataStr = [[NSString alloc] initWithData:body encoding:NSASCIIStringEncoding];
+    
+        NSLog(@"%@", dataStr);
     }
-    
+
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
-    
+
     // setting the body of the post to the reqeust
     [request setHTTPBody:body];
-    
+
     // set the content-length
     NSString *postLength = [NSString stringWithFormat:@"%d", [body length]];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    
+
     // set URL
     [request setURL:url];
-    
+
     NSHTTPURLResponse *responseCode = nil;
     NSError *error = nil;
-    
+
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
-    
+
     NSLog(@"syncing photo status code is: %d", [responseCode statusCode]);
-    
+    NSLog(@"Can't sync with a server! %@ %@", error, [error localizedDescription]);
+
     return [responseCode statusCode];
-    
+
 }
+
+
 
 
 - (int)syncWithLocPhotoId: (NSString *)photoId

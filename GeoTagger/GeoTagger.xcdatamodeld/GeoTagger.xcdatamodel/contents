@@ -13,6 +13,7 @@
         <attribute name="contactWebsite" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="counselingType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="created" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dataId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="evanType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="healthcareType" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -35,6 +36,7 @@
         <relationship name="locationSync" maxCount="1" deletionRule="Nullify" destinationEntity="Sync" inverseName="syncLocation" inverseEntity="Sync" syncable="YES"/>
     </entity>
     <entity name="Sync" representedClassName="Sync" syncable="YES">
+        <attribute name="dataId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isDataSynced" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isPhoto" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isPhotoSynced" optional="YES" attributeType="Boolean" syncable="YES"/>

@@ -372,7 +372,12 @@
     sync.isDataSynced = NO;
     sync.isPhotoSynced = NO;
     
+    sync.dataId = [[[newLocation objectID] URIRepresentation] absoluteString];
+    
+    NSLog(@"newLocation id: %@", sync.dataId);
+    
     newLocation.locationSync = sync;
+    
     
     
     // Save location info.
@@ -384,7 +389,8 @@
     */
     newLocation.latitude = [NSNumber numberWithDouble:coordinate.latitude];
     newLocation.longitude = [NSNumber numberWithDouble:coordinate.longitude];
-    
+    // Set unique location data id
+    newLocation.dataId = [[[newLocation objectID] URIRepresentation] absoluteString];
     
     // Save timestamp
     newLocation.created = [currDate description];
@@ -478,12 +484,16 @@
         }
         
         // Sync photo
-        statusCode = [dataManager syncWithLocPhoto:pngData photoId:newLocation.photoId];
-        if (statusCode >= 200 && statusCode < 300) // sync was successful.
+        if (self.imageView.image)
         {
-            sync.isPhotoSynced = @YES;
+            NSLog(@"Saving a picture...");
+            statusCode = [dataManager syncWithLocPhoto:pngData photoId:newLocation.photoId];
+            if (statusCode >= 200 && statusCode < 300) // sync was successful.
+            {
+                NSLog(@">> Status Code is %d", statusCode);
+                sync.isPhotoSynced = @YES;
+            }
         }
-        
     }
 
     

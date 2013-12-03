@@ -22,7 +22,11 @@ static GTSettings *instance = nil;
             [instance setIsOffline:NO];
             
             // TODO: REMOVE THIS SETTING. This is for dev only.
-            [instance setHostURL:@"http://localhost:8000/api/0.1/location/"];
+            //[instance setHostURL:@"http://localhost:8000/api/0.1/location/"];
+            //[instance setHostURL:@"http://10.0.1.2:8000/api/0.1/location/"];
+            //[instance setHostURL:@"http://10.0.1.2:8000/api/0.1/loc_pic/"];
+            [instance setHostURL:@"http://10.31.15.92:8000/api/0.1/location/"];
+            [instance setHostPhotoURL:@"http://10.31.15.92:8000/m/locpic/"];
             [instance setUsername: @"tester"];
             [instance setAppkey:@"1a2b3c4d5e"];
             

@@ -46,6 +46,8 @@
 @property (nonatomic, retain) NSNumber * youthType;
 @property (nonatomic, retain) Sync *locationSync;
 
+@property (nonatomic, retain) NSString * dataId;
+
 + (NSArray *)getBooleanTypeList;
 
 @end
