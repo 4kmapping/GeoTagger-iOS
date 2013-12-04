@@ -12,6 +12,8 @@
 
 @implementation GTDataManager
 
+static int timeoutSeconds = 7;
+
 
 + (GTDataManager *)getInstance
 {
@@ -133,6 +135,7 @@
     NSString *jsonStr = [self convertToJsonFromObject:location]; 
     NSURL *url = [NSURL URLWithString:[settings hostURL]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setTimeoutInterval:timeoutSeconds];
     
     // Set headers
     NSMutableDictionary * headers = [[NSMutableDictionary alloc] init];
@@ -170,7 +173,7 @@
     NSURL *url = [NSURL URLWithString:[settings hostPhotoURL]];
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setTimeoutInterval:20];
+    [request setTimeoutInterval:timeoutSeconds];
     
     // Set headers
     NSMutableDictionary * headers = [[NSMutableDictionary alloc] init];
@@ -249,15 +252,6 @@
 
     return [responseCode statusCode];
 
-}
-
-
-
-
-- (int)syncWithLocPhotoId: (NSString *)photoId
-{
-    
-    return 0;
 }
 
 

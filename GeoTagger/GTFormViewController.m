@@ -373,8 +373,9 @@
     sync.isPhotoSynced = NO;
     
     sync.dataId = [[[newLocation objectID] URIRepresentation] absoluteString];
+    newLocation.dataId = [[[newLocation objectID] URIRepresentation] absoluteString];
     
-    NSLog(@"newLocation id: %@", sync.dataId);
+    NSLog(@"newLocation id: %@", newLocation.dataId);
     
     newLocation.locationSync = sync;
     
@@ -458,6 +459,7 @@
         
         // Mark that location has an associated photo.
         sync.isPhoto = [NSNumber numberWithBool:YES];
+        sync.photoId = photoid;
         
     }
     

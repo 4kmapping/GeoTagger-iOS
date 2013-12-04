@@ -117,11 +117,11 @@
             </objects>
             <point key="canvasLocation" x="962" y="830"/>
         </scene>
-        <!--Navigation Controller - Settings-->
+        <!--Navigation Controller-->
         <scene sceneID="QMU-QH-8eC">
             <objects>
                 <navigationController definesPresentationContext="YES" id="JXE-o4-QEt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" id="TZs-SK-J5F"/>
+                    <tabBarItem key="tabBarItem" systemItem="more" id="TZs-SK-J5F"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2zn-2c-NNf">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -167,14 +167,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u7P-4T-Lqw">
-                                        <rect key="frame" x="20" y="114" width="99" height="27"/>
+                                        <rect key="frame" x="25" y="114" width="99" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="app key :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aRC-mO-Hnk">
-                                        <rect key="frame" x="20" y="172" width="99" height="27"/>
+                                        <rect key="frame" x="25" y="172" width="99" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -204,6 +204,23 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YWW-hb-JSk">
+                                        <rect key="frame" x="20" y="250" width="228" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="n5u-aK-KdX">
+                                        <rect key="frame" x="220" y="250" width="71" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Sync Data">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="syncAllData:" destination="S77-OF-OH0" eventType="touchUpInside" id="QXs-4t-Lwt"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -213,6 +230,7 @@
                     <navigationItem key="navigationItem" id="WNf-7P-8SM"/>
                     <connections>
                         <outlet property="appkeyLabel" destination="jgg-VW-gpW" id="p73-x6-KxB"/>
+                        <outlet property="syncLabel" destination="YWW-hb-JSk" id="Pdi-Uw-ddU"/>
                         <outlet property="usernameLabel" destination="MXn-ih-kGK" id="7rf-YV-nlu"/>
                     </connections>
                 </viewController>

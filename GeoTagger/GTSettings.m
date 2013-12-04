@@ -112,55 +112,5 @@ static GTSettings *instance = nil;
 }
 
 
-- (void) initializeSettings
-{
-    // assuming NSManagedObjectContext *moc
-    NSLog(@"here");
-    
-    GTDataManager *dataManager = [GTDataManager getInstance];
-    
-    NSManagedObjectContext *context = [dataManager managedObjectContext];
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"Settings" inManagedObjectContext:context]];
-    
-    [request setIncludesSubentities:NO]; //Omit subentities. Default is YES (i.e. include subentities)
-    
-    NSError *error;
-    NSUInteger count = [context countForFetchRequest:request error:&error];
-    if(count == NSNotFound)
-    {
-        NSLog(@"Can't query and count for Settings in data store %@ %@", error, [error localizedDescription]);
-    }
-    
-    NSLog(@"setting entry count is %d", count);
-    // Execute this part only once.
-    if(count == 0)
-    {
-        
-        NSLog(@"Creating new entry");
-        
-        Settings *newSettings = [NSEntityDescription insertNewObjectForEntityForName:@"Settings"
-                                                              inManagedObjectContext:context];
-        newSettings.username = @"";
-        newSettings.appkey = @"";
-        newSettings.isOffline = NO;
-        
-        // TODO: Update this part. Now it is hard-coded.
-        newSettings.hostURL = @"http://192.237.166.7/api/0.1/location/";
-        newSettings.hostPhotoURL = @"http://192.237.166.7/m/locpic/";
-        
-        NSError *error = nil;
-        if (![context save:&error])
-        {
-            NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-        }
-    }
-    
-    
-    
-}
-
-
 
 @end

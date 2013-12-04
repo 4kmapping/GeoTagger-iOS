@@ -29,7 +29,6 @@
 - (int)syncWithLocation:(NSManagedObject *)location;
 
 - (int)syncWithLocPhoto:(NSData *)photoData photoId:(NSString *)photoId;
-- (int)syncWithLocPhoto:(NSData *)photoDataId;
 
 - (NSString *)convertToJsonFromObject:(NSManagedObject *)obj;
 

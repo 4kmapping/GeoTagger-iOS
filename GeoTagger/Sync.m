@@ -17,6 +17,7 @@
 @dynamic isPhotoSynced;
 @dynamic lastSyncTime;
 @dynamic dataId;
+@dynamic photoId;
 @dynamic syncLocation;
 
 @end

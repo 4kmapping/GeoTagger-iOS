@@ -48,11 +48,12 @@
         <attribute name="isPhoto" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isPhotoSynced" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="lastSyncTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="photoId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="syncLocation" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="locationSync" inverseEntity="Location" syncable="YES"/>
     </entity>
     <elements>
         <element name="Location" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Sync" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Settings" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Sync" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

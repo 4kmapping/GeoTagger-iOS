@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSNumber * isPhotoSynced;
 @property (nonatomic, retain) NSDate * lastSyncTime;
 @property (nonatomic, retain) NSString * dataId;
+@property (nonatomic, retain) NSString * photoId;
 @property (nonatomic, retain) Location *syncLocation;
 
 @end
