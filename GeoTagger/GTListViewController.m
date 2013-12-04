@@ -82,7 +82,20 @@
     }
     
     NSManagedObject *location = [locationArray objectAtIndex:[indexPath row]];
-    cell.textLabel.text = [location valueForKey:@"desc"];
+    
+    // Set a title of each cell with description (or timestamp)
+    NSString *loc_desc = [location valueForKey:@"desc"];
+    if ([loc_desc length] == 0) // if desc is empty, use timestamp instead
+    {
+        
+        NSMutableString *timeStr = [NSMutableString stringWithString:[location valueForKey:@"created"]];
+        [timeStr deleteCharactersInRange:[timeStr rangeOfString:@"+0000"]];
+        cell.textLabel.text = timeStr;
+    }
+    else
+    {
+        cell.textLabel.text = [location valueForKey:@"desc"];
+    }
     
     return cell;
     

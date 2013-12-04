@@ -25,8 +25,13 @@ static GTSettings *instance = nil;
             //[instance setHostURL:@"http://localhost:8000/api/0.1/location/"];
             //[instance setHostURL:@"http://10.0.1.2:8000/api/0.1/location/"];
             //[instance setHostURL:@"http://10.0.1.2:8000/api/0.1/loc_pic/"];
-            [instance setHostURL:@"http://10.31.15.92:8000/api/0.1/location/"];
-            [instance setHostPhotoURL:@"http://10.31.15.92:8000/m/locpic/"];
+            //[instance setHostURL:@"http://10.31.15.92:8000/api/0.1/location/"];
+            //[instance setHostPhotoURL:@"http://10.31.15.92:8000/m/locpic/"];
+            
+            // Production Server
+            [instance setHostURL:@"http://192.237.166.7/api/0.1/location/"];
+            [instance setHostPhotoURL:@"http://192.237.166.7/m/locpic/"];
+
             [instance setUsername: @"tester"];
             [instance setAppkey:@"1a2b3c4d5e"];
             
