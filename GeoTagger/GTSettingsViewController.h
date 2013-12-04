@@ -11,7 +11,8 @@
 @interface GTSettingsViewController : UIViewController
 
 
-@property (strong, nonatomic) IBOutlet UITextField *hostName;
+@property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *appkeyLabel;
 
 
 - (IBAction)changeOfflinemode:(id)sender;

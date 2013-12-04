@@ -35,6 +35,13 @@
         <attribute name="youthType" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="locationSync" maxCount="1" deletionRule="Nullify" destinationEntity="Sync" inverseName="syncLocation" inverseEntity="Sync" syncable="YES"/>
     </entity>
+    <entity name="Settings" representedClassName="Settings" syncable="YES">
+        <attribute name="appkey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hostPhotoURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hostURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isOffline" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Sync" representedClassName="Sync" syncable="YES">
         <attribute name="dataId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isDataSynced" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -46,5 +53,6 @@
     <elements>
         <element name="Location" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Sync" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Settings" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

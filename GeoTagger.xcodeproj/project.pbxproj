@@ -11,6 +11,8 @@
 		AB6A566E1846C74300318BB3 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6A566D1846C74300318BB3 /* Location.m */; };
 		ABA8BCB217FB687400245158 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA8BCB117FB687400245158 /* CoreData.framework */; };
 		ABA8BCB517FB68FE00245158 /* GTDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA8BCB417FB68FE00245158 /* GTDataManager.m */; };
+		ABC74335184EC6BD00F44002 /* GTUserInfoUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC74334184EC6BD00F44002 /* GTUserInfoUpdateController.m */; };
+		ABC7433B184ED14200F44002 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC7433A184ED14200F44002 /* Settings.m */; };
 		ABD0461517F513CD00C0B201 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD0461417F513CD00C0B201 /* Foundation.framework */; };
 		ABD0461717F513CD00C0B201 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD0461617F513CD00C0B201 /* CoreGraphics.framework */; };
 		ABD0461917F513CD00C0B201 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD0461817F513CD00C0B201 /* UIKit.framework */; };
@@ -53,6 +55,10 @@
 		ABA8BCB117FB687400245158 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		ABA8BCB317FB68FE00245158 /* GTDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDataManager.h; sourceTree = "<group>"; };
 		ABA8BCB417FB68FE00245158 /* GTDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDataManager.m; sourceTree = "<group>"; };
+		ABC74333184EC6BD00F44002 /* GTUserInfoUpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTUserInfoUpdateController.h; sourceTree = "<group>"; };
+		ABC74334184EC6BD00F44002 /* GTUserInfoUpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTUserInfoUpdateController.m; sourceTree = "<group>"; };
+		ABC74339184ED14200F44002 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		ABC7433A184ED14200F44002 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		ABD0461117F513CD00C0B201 /* GeoTagger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoTagger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD0461417F513CD00C0B201 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ABD0461617F513CD00C0B201 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -150,6 +156,8 @@
 		ABD0461A17F513CD00C0B201 /* GeoTagger */ = {
 			isa = PBXGroup;
 			children = (
+				ABC74333184EC6BD00F44002 /* GTUserInfoUpdateController.h */,
+				ABC74334184EC6BD00F44002 /* GTUserInfoUpdateController.m */,
 				ABEF592C183EE8C800EA2170 /* GTSettings.h */,
 				ABEF592D183EE8C800EA2170 /* GTSettings.m */,
 				ABEF5929183EE61000EA2170 /* GTSettingsViewController.h */,
@@ -177,6 +185,8 @@
 		ABD0461B17F513CD00C0B201 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ABC74339184ED14200F44002 /* Settings.h */,
+				ABC7433A184ED14200F44002 /* Settings.m */,
 				ABF7ECAE184D7FFB00499A9C /* Sync.h */,
 				ABF7ECAF184D7FFB00499A9C /* Sync.m */,
 				AB6A566C1846C74300318BB3 /* Location.h */,
@@ -311,6 +321,8 @@
 				ABD0462B17F513CD00C0B201 /* GeoTaggerViewController.m in Sources */,
 				AB6A566E1846C74300318BB3 /* Location.m in Sources */,
 				ABD0462517F513CD00C0B201 /* GeoTaggerAppDelegate.m in Sources */,
+				ABC7433B184ED14200F44002 /* Settings.m in Sources */,
+				ABC74335184EC6BD00F44002 /* GTUserInfoUpdateController.m in Sources */,
 				ABF7ECB0184D7FFB00499A9C /* Sync.m in Sources */,
 				ABD0469317F5244700C0B201 /* GTMapPoint.m in Sources */,
 				ABA8BCB517FB68FE00245158 /* GTDataManager.m in Sources */,

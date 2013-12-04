@@ -21,5 +21,6 @@
 
 + (GTSettings *)getInstance;
 
+- (void) save;
 
 @end

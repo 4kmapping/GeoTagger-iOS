@@ -20,6 +20,22 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+	// Do any additional setup after loading the view.
+    GTSettings *settings = [GTSettings getInstance];
+    
+    // Initialize fields with previously stored values
+    self.usernameLabel.text = settings.username;
+    self.appkeyLabel.text = settings.appkey;
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    // Will refresh this view everytime it shows up.
+    [super viewWillAppear:animated];
+    [self viewDidLoad];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,4 +55,8 @@
     NSLog(@"Now offline mode is %d", settings.isOffline);
     
 }
+
+
+
+
 @end
