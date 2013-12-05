@@ -33,3 +33,9 @@
 - (NSString *)convertToJsonFromObject:(NSManagedObject *)obj;
 
 @end
+
+// TODO: Update this part later.
+// Category for handling uncertified dev https.
+@interface NSURLRequest(Private)
++(void)setAllowsAnyHTTPSCertificate:(BOOL)inAllow forHost:(NSString *)inHost;
+@end

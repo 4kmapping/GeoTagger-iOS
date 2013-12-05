@@ -206,19 +206,17 @@
             
             NSArray *dataList = [context executeFetchRequest:request error:&error];
             
-            NSLog(@"dataList size: %d", [dataList count]);
-            NSLog(@"Can't fetch! %@ %@", error, [error localizedDescription]);
             
             NSManagedObject *currData = [dataList objectAtIndex:0];
-            
-            NSLog(@"data desc: %@", [currData valueForKey:@"desc"]);
-            
-            NSLog(@"data id: %@", [currData valueForKey:@"dataId"]);
-            
+
             [[self dataToSync] addObject:currData];
             
-            NSLog(@"dataToSync size: %d", [self.dataToSync count]);
-
+            /* For debugging */
+            //NSLog(@"dataList size: %d", [dataList count]);
+            //NSLog(@"Can't fetch! %@ %@", error, [error localizedDescription]);
+            //NSLog(@"data desc: %@", [currData valueForKey:@"desc"]);
+            //NSLog(@"data id: %@", [currData valueForKey:@"dataId"]);
+            //NSLog(@"dataToSync size: %d", [self.dataToSync count]);
         
         }
         
@@ -237,9 +235,9 @@
             
             [[self photoToSync] addObject:photoId];
             
-            NSLog(@"photoId to sync: %@", photoId);
-            
-            NSLog(@"photoToSync size: %d", [self.photoToSync count]);
+            /* For debugging */
+            //NSLog(@"photoId to sync: %@", photoId);
+            //NSLog(@"photoToSync size: %d", [self.photoToSync count]);
         }
         
         

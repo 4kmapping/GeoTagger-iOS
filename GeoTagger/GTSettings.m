@@ -49,13 +49,13 @@ static GTSettings *instance = nil;
                 
                 Settings *newSettings = [NSEntityDescription insertNewObjectForEntityForName:@"Settings"
                                                                       inManagedObjectContext:context];
-                newSettings.username = @"anonymous";
-                newSettings.appkey = @"1234567890";
+                newSettings.username = @"";
+                newSettings.appkey = @"";
                 newSettings.isOffline = NO;
                 
                 // TODO: Update this part. Now it is hard-coded.
-                newSettings.hostURL = @"http://192.237.166.7/api/0.1/location/";
-                newSettings.hostPhotoURL = @"http://192.237.166.7/m/locpic/";
+                newSettings.hostURL = @"https://192.237.166.7/api/0.1/location/";
+                newSettings.hostPhotoURL = @"https://192.237.166.7/m/locpic/";
                 
                 NSError *error = nil;
                 if (![context save:&error])

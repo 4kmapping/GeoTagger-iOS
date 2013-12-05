@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB054E15185020B800D0DB7D /* list-star-7.png in Resources */ = {isa = PBXBuildFile; fileRef = AB054E14185020B800D0DB7D /* list-star-7.png */; };
+		AB054E17185020E100D0DB7D /* map-pin-7.png in Resources */ = {isa = PBXBuildFile; fileRef = AB054E16185020E100D0DB7D /* map-pin-7.png */; };
 		AB597A0617F6326B00970F95 /* GTFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB597A0517F6326B00970F95 /* GTFormViewController.m */; };
 		AB6A566E1846C74300318BB3 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6A566D1846C74300318BB3 /* Location.m */; };
 		ABA8BCB217FB687400245158 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA8BCB117FB687400245158 /* CoreData.framework */; };
@@ -34,6 +36,7 @@
 		ABE3AFDB183C545B0034319B /* GeoTagger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABE3AFD9183C545B0034319B /* GeoTagger.xcdatamodeld */; };
 		ABEF592B183EE61000EA2170 /* GTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABEF592A183EE61000EA2170 /* GTSettingsViewController.m */; };
 		ABEF592E183EE8C800EA2170 /* GTSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = ABEF592D183EE8C800EA2170 /* GTSettings.m */; };
+		ABF0E61B185004B700866D75 /* 4K_logo_app_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = ABF0E61A185004B700866D75 /* 4K_logo_app_icon.png */; };
 		ABF7ECB0184D7FFB00499A9C /* Sync.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF7ECAF184D7FFB00499A9C /* Sync.m */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB054E14185020B800D0DB7D /* list-star-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list-star-7.png"; path = "../list-star-7.png"; sourceTree = "<group>"; };
+		AB054E16185020E100D0DB7D /* map-pin-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-pin-7.png"; path = "../map-pin-7.png"; sourceTree = "<group>"; };
 		AB597A0417F6326B00970F95 /* GTFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTFormViewController.h; sourceTree = "<group>"; };
 		AB597A0517F6326B00970F95 /* GTFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTFormViewController.m; sourceTree = "<group>"; };
 		AB6A566C1846C74300318BB3 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
@@ -89,6 +94,7 @@
 		ABEF592A183EE61000EA2170 /* GTSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTSettingsViewController.m; sourceTree = "<group>"; };
 		ABEF592C183EE8C800EA2170 /* GTSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTSettings.h; sourceTree = "<group>"; };
 		ABEF592D183EE8C800EA2170 /* GTSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTSettings.m; sourceTree = "<group>"; };
+		ABF0E61A185004B700866D75 /* 4K_logo_app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 4K_logo_app_icon.png; path = ../4K_logo_app_icon.png; sourceTree = "<group>"; };
 		ABF7ECAE184D7FFB00499A9C /* Sync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sync.h; sourceTree = "<group>"; };
 		ABF7ECAF184D7FFB00499A9C /* Sync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sync.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -185,6 +191,9 @@
 		ABD0461B17F513CD00C0B201 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AB054E16185020E100D0DB7D /* map-pin-7.png */,
+				AB054E14185020B800D0DB7D /* list-star-7.png */,
+				ABF0E61A185004B700866D75 /* 4K_logo_app_icon.png */,
 				ABC74339184ED14200F44002 /* Settings.h */,
 				ABC7433A184ED14200F44002 /* Settings.m */,
 				ABF7ECAE184D7FFB00499A9C /* Sync.h */,
@@ -296,7 +305,10 @@
 			files = (
 				ABD0462D17F513CD00C0B201 /* Images.xcassets in Resources */,
 				ABD0461F17F513CD00C0B201 /* InfoPlist.strings in Resources */,
+				ABF0E61B185004B700866D75 /* 4K_logo_app_icon.png in Resources */,
 				ABD0462817F513CD00C0B201 /* Main.storyboard in Resources */,
+				AB054E17185020E100D0DB7D /* map-pin-7.png in Resources */,
+				AB054E15185020B800D0DB7D /* list-star-7.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

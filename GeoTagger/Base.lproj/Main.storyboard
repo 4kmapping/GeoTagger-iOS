@@ -117,11 +117,11 @@
             </objects>
             <point key="canvasLocation" x="962" y="830"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Settings-->
         <scene sceneID="QMU-QH-8eC">
             <objects>
                 <navigationController definesPresentationContext="YES" id="JXE-o4-QEt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="TZs-SK-J5F"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="list-star-7.png" id="TZs-SK-J5F"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2zn-2c-NNf">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -246,21 +246,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="DTY-1a-mZJ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type your username" minimumFontSize="17" id="DTY-1a-mZJ">
                                 <rect key="frame" x="20" y="137" width="280" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="2CS-Vu-pXW">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type your appkey" minimumFontSize="17" id="2CS-Vu-pXW">
                                 <rect key="frame" x="20" y="212" width="280" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aNk-Ce-X5p">
                                 <rect key="frame" x="20" y="107" width="99" height="27"/>
@@ -283,9 +283,10 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update username or app key by typing into each field and click Update button. Click Back button above will cancel changes." lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ubv-Av-V4A">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ubv-Av-V4A">
                                 <rect key="frame" x="20" y="264" width="287" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">Update username or app key by typing into each field and click Update button. Click Back button above without clicking Update button will cancel changes.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -797,11 +798,11 @@
             </objects>
             <point key="canvasLocation" x="2011" y="-297"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Tag-->
         <scene sceneID="plE-JV-DI8">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="swJ-jQ-QCk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="dzi-oe-1Uj"/>
+                    <tabBarItem key="tabBarItem" title="Tag" image="map-pin-7.png" id="dzi-oe-1Uj"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="O18-x1-ixN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -837,6 +838,10 @@
             <point key="canvasLocation" x="-220" y="830"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="list-star-7.png" width="30" height="30"/>
+        <image name="map-pin-7.png" width="30" height="30"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

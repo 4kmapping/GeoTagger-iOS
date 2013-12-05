@@ -134,6 +134,10 @@ static int timeoutSeconds = 7;
     GTSettings *settings = [GTSettings getInstance];
     NSString *jsonStr = [self convertToJsonFromObject:location]; 
     NSURL *url = [NSURL URLWithString:[settings hostURL]];
+    
+    // TODO: This is a temporary setting to by-pass uncertified SSL. UPDATE THIS PART
+    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setTimeoutInterval:timeoutSeconds];
     
@@ -155,9 +159,9 @@ static int timeoutSeconds = 7;
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
 
     /* For Debugging */
-    NSLog(@"json data is: %@", jsonStr);
-    NSLog(@"syncing location status code is: %d", [responseCode statusCode]);
-    NSLog(@"Can't sync with a server! %@ %@", error, [error localizedDescription]);
+    //NSLog(@"json data is: %@", jsonStr);
+    //NSLog(@"syncing location status code is: %d", [responseCode statusCode]);
+    //NSLog(@"Can't sync with a server! %@ %@", error, [error localizedDescription]);
     
     
     return [responseCode statusCode];
@@ -227,7 +231,7 @@ static int timeoutSeconds = 7;
     
         NSString *dataStr = [[NSString alloc] initWithData:body encoding:NSASCIIStringEncoding];
     
-        NSLog(@"%@", dataStr);
+        //NSLog(@"%@", dataStr);
     }
 
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -247,8 +251,8 @@ static int timeoutSeconds = 7;
 
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
 
-    NSLog(@"syncing photo status code is: %d", [responseCode statusCode]);
-    NSLog(@"Can't sync with a server! %@ %@", error, [error localizedDescription]);
+    //NSLog(@"syncing photo status code is: %d", [responseCode statusCode]);
+    //NSLog(@"Can't sync with a server! %@ %@", error, [error localizedDescription]);
 
     return [responseCode statusCode];
 
