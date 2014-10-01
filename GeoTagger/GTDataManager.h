@@ -9,10 +9,7 @@
 #import <Foundation/Foundation.h>
 @class GTData;
 
-@interface GTDataManager : NSObject 
-{
-    NSMutableData *_responseData;
-}
+@interface GTDataManager : NSObject
 
 + (GTDataManager *)getInstance;
 
