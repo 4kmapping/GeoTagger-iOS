@@ -11,9 +11,12 @@
 
 @interface GTDataManager : NSObject
 
-+ (GTDataManager *)getInstance;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-- (NSManagedObjectContext *)managedObjectContext;
+
++ (GTDataManager *)getInstance;
 
 - (NSMutableArray *)getAllLocations;
 
