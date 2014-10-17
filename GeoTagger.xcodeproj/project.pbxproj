@@ -126,6 +126,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ABAA7A39185695DE0002EB3D /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		ABD0460817F513CD00C0B201 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +169,7 @@
 		ABD0461A17F513CD00C0B201 /* GeoTagger */ = {
 			isa = PBXGroup;
 			children = (
+				ABAA7A39185695DE0002EB3D /* iPad */,
 				ABC74333184EC6BD00F44002 /* GTUserInfoUpdateController.h */,
 				ABC74334184EC6BD00F44002 /* GTUserInfoUpdateController.m */,
 				ABEF592C183EE8C800EA2170 /* GTSettings.h */,
@@ -274,6 +282,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = msk;
 				TargetAttributes = {
+					ABD0461017F513CD00C0B201 = {
+						DevelopmentTeam = 7YYAD9366T;
+					};
 					ABD0463117F513CD00C0B201 = {
 						TestTargetID = ABD0461017F513CD00C0B201;
 					};
@@ -467,10 +478,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoTagger/GeoTagger-Prefix.pch";
 				INFOPLIST_FILE = "GeoTagger/GeoTagger-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -480,10 +496,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoTagger/GeoTagger-Prefix.pch";
 				INFOPLIST_FILE = "GeoTagger/GeoTagger-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
