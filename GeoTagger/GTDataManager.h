@@ -9,14 +9,14 @@
 #import <Foundation/Foundation.h>
 @class GTData;
 
-@interface GTDataManager : NSObject 
-{
-    NSMutableData *_responseData;
-}
+@interface GTDataManager : NSObject
+
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
 
 + (GTDataManager *)getInstance;
-
-- (NSManagedObjectContext *)managedObjectContext;
 
 - (NSMutableArray *)getAllLocations;
 

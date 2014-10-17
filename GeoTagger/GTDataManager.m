@@ -10,19 +10,21 @@
 #import "GTSettings.h"
 #import "Location.h"
 
+/*
+ GTDataManager contains all the common methods used to read/write data to local and remote storage.
+ */
 @implementation GTDataManager
 
-static int timeoutSeconds = 7;
+static const int timeoutSeconds = 7;
 
-
-+ (GTDataManager *)getInstance
++ (instancetype)getInstance
 {
     static GTDataManager *singletonInstance = nil;
     @synchronized(self)
     {
-        if(singletonInstance == nil)
+        if(!singletonInstance)
         {
-            singletonInstance = [[self alloc] init];
+            singletonInstance = [[self alloc] initPrivate];
         }
     }
     
@@ -30,14 +32,32 @@ static int timeoutSeconds = 7;
     
 }
 
-- (NSManagedObjectContext *)managedObjectContext
-{
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
+// throw exception if default initializer is attempted
+- (instancetype) init {
+    [NSException raise:@"Singleton" format:@"Use +[GTDataManager getInstance]"];
+    return nil;
+}
+
+// private initializer, not exposed externally
+- (instancetype) initPrivate {
+    self = [super init];
+    if (self) {
+        NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"GeoTagger" withExtension:@"momd"];
+        _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+        
+        NSURL *storeURL = [[GTDataManager applicationDocumentsDirectory] URLByAppendingPathComponent:@"GeoTagger.sqlite"];
+        NSError *error;
+        NSPersistentStoreCoordinator * psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
+        if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+            [NSException raise:@"Open failure" format:@"Unresolved error %@, %@", error, [error userInfo]];
+        } else {
+            _persistentStoreCoordinator = psc;
+        }
+        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [_managedObjectContext setPersistentStoreCoordinator:psc];
     }
-    return context;
+    
+    return self;
 }
 
 - (NSMutableArray *)getAllLocations
@@ -56,7 +76,6 @@ static int timeoutSeconds = 7;
     
     return locations;
 }
-
 
 - (NSMutableArray *)getAllLocationsWithDescendingDateSorting
 {
@@ -78,7 +97,6 @@ static int timeoutSeconds = 7;
     
     return locations;
 }
-
 
 /* REFINE OR DELETE THIS
  =======
@@ -296,6 +314,13 @@ static int timeoutSeconds = 7;
     return jsonStr;
 }
 
+#pragma mark - Application's Documents directory
+
+// Returns the URL to the application's Documents directory.
++ (NSURL *)applicationDocumentsDirectory
+{
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
 
 
 @end
