@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		708367D219DCA57700E2FCA0 /* GTDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 708367D119DCA57700E2FCA0 /* GTDataManagerTests.m */; };
 		AB054E15185020B800D0DB7D /* list-star-7.png in Resources */ = {isa = PBXBuildFile; fileRef = AB054E14185020B800D0DB7D /* list-star-7.png */; };
 		AB054E17185020E100D0DB7D /* map-pin-7.png in Resources */ = {isa = PBXBuildFile; fileRef = AB054E16185020E100D0DB7D /* map-pin-7.png */; };
 		AB597A0617F6326B00970F95 /* GTFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB597A0517F6326B00970F95 /* GTFormViewController.m */; };
@@ -28,7 +29,6 @@
 		ABD0463517F513CD00C0B201 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD0461417F513CD00C0B201 /* Foundation.framework */; };
 		ABD0463617F513CD00C0B201 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD0461817F513CD00C0B201 /* UIKit.framework */; };
 		ABD0463E17F513CD00C0B201 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABD0463C17F513CD00C0B201 /* InfoPlist.strings */; };
-		ABD0464017F513CD00C0B201 /* GeoTaggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD0463F17F513CD00C0B201 /* GeoTaggerTests.m */; };
 		ABD0464A17F513E500C0B201 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD0464917F513E500C0B201 /* CoreLocation.framework */; };
 		ABD0464C17F513F000C0B201 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD0464B17F513F000C0B201 /* MapKit.framework */; };
 		ABD0469317F5244700C0B201 /* GTMapPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD0469217F5244700C0B201 /* GTMapPoint.m */; };
@@ -51,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		708367D119DCA57700E2FCA0 /* GTDataManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDataManagerTests.m; sourceTree = "<group>"; };
 		AB054E14185020B800D0DB7D /* list-star-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list-star-7.png"; path = "../list-star-7.png"; sourceTree = "<group>"; };
 		AB054E16185020E100D0DB7D /* map-pin-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-pin-7.png"; path = "../map-pin-7.png"; sourceTree = "<group>"; };
 		AB597A0417F6326B00970F95 /* GTFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTFormViewController.h; sourceTree = "<group>"; };
@@ -82,7 +83,6 @@
 		ABD0463317F513CD00C0B201 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		ABD0463B17F513CD00C0B201 /* GeoTaggerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GeoTaggerTests-Info.plist"; sourceTree = "<group>"; };
 		ABD0463D17F513CD00C0B201 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		ABD0463F17F513CD00C0B201 /* GeoTaggerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoTaggerTests.m; sourceTree = "<group>"; };
 		ABD0464917F513E500C0B201 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		ABD0464B17F513F000C0B201 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		ABD0469117F5244700C0B201 /* GTMapPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMapPoint.h; sourceTree = "<group>"; };
@@ -211,7 +211,7 @@
 		ABD0463917F513CD00C0B201 /* GeoTaggerTests */ = {
 			isa = PBXGroup;
 			children = (
-				ABD0463F17F513CD00C0B201 /* GeoTaggerTests.m */,
+				708367D119DCA57700E2FCA0 /* GTDataManagerTests.m */,
 				ABD0463A17F513CD00C0B201 /* Supporting Files */,
 			);
 			path = GeoTaggerTests;
@@ -351,7 +351,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABD0464017F513CD00C0B201 /* GeoTaggerTests.m in Sources */,
+				708367D219DCA57700E2FCA0 /* GTDataManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
