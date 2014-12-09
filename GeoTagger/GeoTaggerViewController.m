@@ -12,6 +12,10 @@
 #import "GTDataManager.h"
 #import "GTSettings.h"
 
+// To check if the current device is after iOS7
+#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+
+
 @interface GeoTaggerViewController ()
 
 @end
@@ -99,6 +103,14 @@
     if (self)
     {
         locationManager = [[CLLocationManager alloc] init];
+        
+        // If devide is >= iOS 8, you need these.
+        if(IS_OS_8_OR_LATER) {
+            [locationManager requestWhenInUseAuthorization];
+            
+            
+        }
+        
         [locationManager setDelegate:self];
         [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
         [locationManager startUpdatingLocation];
