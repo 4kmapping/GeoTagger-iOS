@@ -51,7 +51,7 @@ static GTSettings *instance = nil;
                                                                       inManagedObjectContext:context];
                 newSettings.username = @"";
                 newSettings.appkey = @"";
-                newSettings.isOffline = NO;
+                newSettings.isOffline = false; //NO; bobc
                 
                 // TODO: Update this part. Now it is hard-coded.
                 newSettings.hostURL = @"https://192.237.166.7/api/0.1/location/";
