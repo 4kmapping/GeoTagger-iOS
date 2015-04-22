@@ -277,6 +277,72 @@ static const int timeoutSeconds = 7;
 }
 
 
+- (NSMutableArray *)getPlaceCandidateListWithPlaceName:(NSString *)placeName
+                                           countryName:(NSString *)countryName
+{
+    /*
+    Call a remote mobile server to get place candidates related with user's input.
+    User's input has place name (city name, town name) and country name.
+    */
+    
+    NSLog(@"Factual query...");
+    
+    NSMutableArray *results;
+    
+    // Create request
+    GTSettings *settings = [GTSettings getInstance];
+    //NSURL *url = [NSURL URLWithString:[settings hostURL]];
+    //NSURL *url = [NSURL URLWithString:@"http://127.0.0.1:5000/proxy/q?place=redlands&country=US"];
+    NSURL *url = [NSURL URLWithString:@"http://127.0.0.1:5000/proxy/q"];
+    
+    // TODO: This is a temporary setting to by-pass uncertified SSL. UPDATE THIS PART
+    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setTimeoutInterval:timeoutSeconds];
+    
+    // Set headers
+    NSMutableDictionary * headers = [[NSMutableDictionary alloc] init];
+    /*
+    NSString *appkeyStr = [NSString stringWithFormat:@"ApiKey %@:%@", settings.username, settings.appkey];
+    [headers setObject:appkeyStr forKey:@"Authorization"];
+    [headers setObject:@"application/json" forKey:@"Accept"];
+    [headers setObject:@"application/json" forKey:@"Content-Type"];
+    */
+    [request setAllHTTPHeaderFields:headers];
+    
+    request.HTTPMethod = @"POST";
+    NSString *postString = [NSString stringWithFormat:@"place=%@&country=%@", placeName, countryName];
+    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSLog(@"Request String: %@", postString);
+    
+    NSHTTPURLResponse *responseCode = nil;
+    NSError *error = nil;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+    
+    NSDictionary *resultsDic = [NSJSONSerialization JSONObjectWithData:responseData
+                                                               options:NSJSONReadingMutableContainers
+                                                                 error:nil];
+    
+    NSDictionary *target = [[(NSDictionary *)[resultsDic objectForKey:@"response"] objectForKey:@"data"] objectAtIndex:0];
+    NSString *contextName = [target objectForKey:@"contextname"];
+    
+    NSLog(@"Factual API Response: %@", (NSString *)[resultsDic objectForKey:@"status"]);
+    NSLog(@"Factual API Response: %@", contextName);
+    
+    // For Debugging
+    //NSLog(@"json data is: %@", jsonStr);
+    NSLog(@"syncing location status code is: %d", [responseCode statusCode]);
+    //NSLog(@"Can't sync with a server! %@ %@", error, [error localizedDescription]);
+    
+
+    return results;
+}
+
+
+
 # pragma Helper methods
 
 - (NSString *)convertToJsonFromObject:(NSManagedObject *)obj
