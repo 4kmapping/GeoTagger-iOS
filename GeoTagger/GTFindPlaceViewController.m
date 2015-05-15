@@ -8,6 +8,8 @@
 
 #import "GTFindPlaceViewController.h"
 #import "GTDataManager.h"
+#import "PlaceCandidate.h"
+#import "GeoTaggerViewController.h"
 
 
 @interface GTFindPlaceViewController ()
@@ -16,6 +18,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *countryField;
 
 @end
+
+
 
 @implementation GTFindPlaceViewController
 
@@ -52,25 +56,74 @@
     {
         // Get a places list from Factual API
         GTDataManager *dataManager = [GTDataManager getInstance];
-        NSMutableArray *responseArray = [dataManager getPlaceCandidateListWithPlaceName:placeName
+        placeCandidates = [dataManager getPlaceCandidateListWithPlaceName:placeName
                                                                 countryName:countryCode];
-        // NSLog(@"Factual API Reponse: %@", responseArray);
+        //NSLog(@"Factual API Reponse: %@", responseArray);
+        
+        [self.placeCandidatesTable reloadData];
         
     }
-        
     
     // Talk to a server to get a place candidates list
     
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [placeCandidates count];
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"placeCell"];
     
+    
+    // If place search has not been made yet, show empty cell
+    if (placeCandidates != nil)
+    {
+        PlaceCandidate *curr = placeCandidates[[indexPath row]];
+        cell.textLabel.font = [UIFont systemFontOfSize:12.0];
+        cell.textLabel.text = [curr contextname];
+    }
+    
+    return cell;
 }
 
 /*
-#pragma mark - Navigation
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"selectedPlaceSegue" sender:tableView];
+}
+*/
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger rowIndex = [indexPath row];
+    PlaceCandidate *selectedOne = [placeCandidates objectAtIndex:rowIndex];
+    [self.gtvController setSelectedPlace:selectedOne];
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+
+#pragma mark - Navigation
+/*
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+    if ([[segue identifier] isEqualToString:@"selectedPlaceSegue"])
+    {
+        GeoTaggerViewController *destination = [segue destinationViewController];
+        // Get a selected place info
+        NSInteger rowIndex = [[self.placeCandidatesTable indexPathForSelectedRow] row];
+        PlaceCandidate *selectedOne = [placeCandidates objectAtIndex:rowIndex];
+        [destination setSelectedPlace: selectedOne];
+        
+        NSLog(@"inside of GTFindPlaceViewController: prepareForSegue");
+    }
+    
 }
 */
 

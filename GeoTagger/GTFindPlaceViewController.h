@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GeoTaggerViewController.h"
 
-@interface GTFindPlaceViewController : UIViewController
+@interface GTFindPlaceViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+{
+    NSMutableArray *placeCandidates;
+}
+
+@property (strong, nonatomic) IBOutlet UITableView *placeCandidatesTable;
+@property (weak, nonatomic) GeoTaggerViewController *gtvController;
+
 
 @end

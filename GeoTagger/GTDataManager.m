@@ -9,6 +9,7 @@
 #import "GTDataManager.h"
 #import "GTSettings.h"
 #import "Location.h"
+#import "PlaceCandidate.h"
 
 /*
  GTDataManager contains all the common methods used to read/write data to local and remote storage.
@@ -326,15 +327,25 @@ static const int timeoutSeconds = 7;
                                                                options:NSJSONReadingMutableContainers
                                                                  error:nil];
     
-    NSDictionary *target = [[(NSDictionary *)[resultsDic objectForKey:@"response"] objectForKey:@"data"] objectAtIndex:0];
-    NSString *contextName = [target objectForKey:@"contextname"];
+    NSArray *target = (NSArray *)[resultsDic objectForKey:@"data"];
+    results = [[NSMutableArray alloc]init];
     
-    NSLog(@"Factual API Response: %@", (NSString *)[resultsDic objectForKey:@"status"]);
-    NSLog(@"Factual API Response: %@", contextName);
+    for (id item in target)
+    {
+        // Create an data object
+        PlaceCandidate *pcandidate = [[PlaceCandidate alloc]init];
+        [pcandidate setContextname:[item objectForKey:@"contextname"]];
+        [pcandidate setLatitude:[item objectForKey:@"latitude"]];
+        [pcandidate setLongitude:[item objectForKey:@"longitude"]];
+        [pcandidate setFactualId:[item objectForKey:@"fact_id"]];
+        [results addObject:pcandidate];
+        NSLog(@"selected coordinate: %@, %@", pcandidate.latitude, pcandidate.longitude);
+    }
     
+
     // For Debugging
     //NSLog(@"json data is: %@", jsonStr);
-    NSLog(@"syncing location status code is: %d", [responseCode statusCode]);
+    //NSLog(@"syncing location status code is: %d", [responseCode statusCode]);
     //NSLog(@"Can't sync with a server! %@ %@", error, [error localizedDescription]);
     
 

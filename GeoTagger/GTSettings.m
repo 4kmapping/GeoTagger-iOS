@@ -21,7 +21,6 @@ static GTSettings *instance = nil;
         if(instance == nil)
         {
 
-            
             instance = [GTSettings new];
             
             GTDataManager *dataManager = [GTDataManager getInstance];
