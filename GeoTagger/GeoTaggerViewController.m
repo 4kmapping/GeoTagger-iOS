@@ -9,6 +9,7 @@
 #import "GeoTaggerViewController.h"
 #import "GTMapPoint.h"
 #import "GTFormViewController.h"
+#import "GTFindPlaceViewController.h"
 #import "GTDataManager.h"
 #import "GTSettings.h"
 
@@ -26,7 +27,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    NSLog(@"called view will appear" );
+    //NSLog(@"called view will appear" );
     [self viewDidLoad];
     
 }
@@ -73,14 +74,37 @@
     }
     else
     {
-        [worldView setShowsUserLocation:YES];
-        
+        // If a user is using GPS to get the current location
+        if (self.selectedPlace == nil)
+        {
+            // If a user is using GPS
+            [worldView setShowsUserLocation:YES];
+            
+
+        }
+        else // If a user selected a place of interest without using GPS
+        {
+            NSLog(@"inside of GeoTaggerViewController: setting selected place into a map");
+            MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
+            CLLocationCoordinate2D coord;
+            
+            coord.latitude = [[self.selectedPlace latitude] doubleValue];
+            coord.longitude = [[self.selectedPlace longitude] doubleValue];
+            annotation.coordinate = coord;
+            NSLog(@"selected coordinate: %d, %d", coord.latitude, coord.longitude);
+            
+            [worldView setShowsUserLocation:NO];
+            [worldView addAnnotation:annotation];
+
+        }
+
         // If no UserLocationMap exists in subview array, put it back to display the map view.
         if (self.removedUserMapView != NULL)
         {
             [self.view addSubview:worldView];
             [self setRemovedUserMapView:NULL];
         }
+
         
     }
     
@@ -105,7 +129,8 @@
         locationManager = [[CLLocationManager alloc] init];
         
         // If devide is >= iOS 8, you need these.
-        if(IS_OS_8_OR_LATER) {
+        if(IS_OS_8_OR_LATER)
+        {
             [locationManager requestWhenInUseAuthorization];
             
             
@@ -177,7 +202,7 @@
 - (void)mapView:(MKMapView *)mapView
     didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-
+    NSLog(@"Inside of mapView didUpdateUserLocation");
     // Disable default "Current Locaton" callout bubble.
     userLocation.title = nil;
     userLocation.subtitle = nil;
@@ -262,7 +287,6 @@
             //[locationManager startUpdatingLocation];
         }
         
-        
     }
 }
 
@@ -307,9 +331,16 @@
         [formController setLocationToDisplay:NULL];
     }
     
+    if ([[segue identifier] isEqualToString:@"findPlaceSegue"])
+    {
+        self.selectedPlace = nil;
+        GTFindPlaceViewController *destination = [segue destinationViewController];
+        [destination setGtvController:self];
+    }
+    
 }
 
-
+/* HERE
 - (MKAnnotationView *)mapView:(MKMapView *)mapView
             viewForAnnotation:(id <MKAnnotation>)annotation
 {
@@ -351,7 +382,7 @@
     
     return nil;
 }
-
+*/
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view
     calloutAccessoryControlTapped:(UIControl *)control

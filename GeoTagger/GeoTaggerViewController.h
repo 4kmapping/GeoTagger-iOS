@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+#import "PlaceCandidate.h"
 
 
 @interface GeoTaggerViewController : UIViewController
@@ -21,14 +22,15 @@
 
 }
 
-
 @property (nonatomic) NSManagedObject *currLocation;
-
+@property (nonatomic) PlaceCandidate *selectedPlace;
 // Indicator that tells if previous choice was offline mode.
 // If this vlaue is not NULL, the previous choice was offline mode.
 // It itself is a pointer to UserLocationMap and will be used to put the view
 //   back to view controller.
 @property (strong, nonatomic) UIView *removedUserMapView;
+
+
 
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error;

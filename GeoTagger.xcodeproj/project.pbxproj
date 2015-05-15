@@ -10,8 +10,11 @@
 		708367D219DCA57700E2FCA0 /* GTDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 708367D119DCA57700E2FCA0 /* GTDataManagerTests.m */; };
 		AB054E15185020B800D0DB7D /* list-star-7.png in Resources */ = {isa = PBXBuildFile; fileRef = AB054E14185020B800D0DB7D /* list-star-7.png */; };
 		AB054E17185020E100D0DB7D /* map-pin-7.png in Resources */ = {isa = PBXBuildFile; fileRef = AB054E16185020E100D0DB7D /* map-pin-7.png */; };
+		AB11FD891AE6F8D900F9DC10 /* GTFindPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB11FD881AE6F8D900F9DC10 /* GTFindPlaceViewController.m */; };
 		AB597A0617F6326B00970F95 /* GTFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB597A0517F6326B00970F95 /* GTFormViewController.m */; };
 		AB6A566E1846C74300318BB3 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6A566D1846C74300318BB3 /* Location.m */; };
+		AB76CBF01B069465005DE162 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB76CBEE1B069465005DE162 /* Main.storyboard */; };
+		AB89EAA41B0547E3000AD095 /* PlaceCandidate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB89EAA31B0547E3000AD095 /* PlaceCandidate.m */; };
 		ABA8BCB217FB687400245158 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA8BCB117FB687400245158 /* CoreData.framework */; };
 		ABA8BCB517FB68FE00245158 /* GTDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA8BCB417FB68FE00245158 /* GTDataManager.m */; };
 		ABC74335184EC6BD00F44002 /* GTUserInfoUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC74334184EC6BD00F44002 /* GTUserInfoUpdateController.m */; };
@@ -22,7 +25,6 @@
 		ABD0461F17F513CD00C0B201 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABD0461D17F513CD00C0B201 /* InfoPlist.strings */; };
 		ABD0462117F513CD00C0B201 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD0462017F513CD00C0B201 /* main.m */; };
 		ABD0462517F513CD00C0B201 /* GeoTaggerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD0462417F513CD00C0B201 /* GeoTaggerAppDelegate.m */; };
-		ABD0462817F513CD00C0B201 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABD0462617F513CD00C0B201 /* Main.storyboard */; };
 		ABD0462B17F513CD00C0B201 /* GeoTaggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD0462A17F513CD00C0B201 /* GeoTaggerViewController.m */; };
 		ABD0462D17F513CD00C0B201 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABD0462C17F513CD00C0B201 /* Images.xcassets */; };
 		ABD0463417F513CD00C0B201 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD0463317F513CD00C0B201 /* XCTest.framework */; };
@@ -54,10 +56,15 @@
 		708367D119DCA57700E2FCA0 /* GTDataManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDataManagerTests.m; sourceTree = "<group>"; };
 		AB054E14185020B800D0DB7D /* list-star-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list-star-7.png"; path = "../list-star-7.png"; sourceTree = "<group>"; };
 		AB054E16185020E100D0DB7D /* map-pin-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-pin-7.png"; path = "../map-pin-7.png"; sourceTree = "<group>"; };
+		AB11FD871AE6F8D900F9DC10 /* GTFindPlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTFindPlaceViewController.h; sourceTree = "<group>"; };
+		AB11FD881AE6F8D900F9DC10 /* GTFindPlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTFindPlaceViewController.m; sourceTree = "<group>"; };
 		AB597A0417F6326B00970F95 /* GTFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTFormViewController.h; sourceTree = "<group>"; };
 		AB597A0517F6326B00970F95 /* GTFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTFormViewController.m; sourceTree = "<group>"; };
 		AB6A566C1846C74300318BB3 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		AB6A566D1846C74300318BB3 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		AB76CBEF1B069465005DE162 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AB89EAA21B0547E3000AD095 /* PlaceCandidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceCandidate.h; sourceTree = "<group>"; };
+		AB89EAA31B0547E3000AD095 /* PlaceCandidate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceCandidate.m; sourceTree = "<group>"; };
 		ABA8BCB117FB687400245158 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		ABA8BCB317FB68FE00245158 /* GTDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDataManager.h; sourceTree = "<group>"; };
 		ABA8BCB417FB68FE00245158 /* GTDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDataManager.m; sourceTree = "<group>"; };
@@ -75,7 +82,6 @@
 		ABD0462217F513CD00C0B201 /* GeoTagger-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GeoTagger-Prefix.pch"; sourceTree = "<group>"; };
 		ABD0462317F513CD00C0B201 /* GeoTaggerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoTaggerAppDelegate.h; sourceTree = "<group>"; };
 		ABD0462417F513CD00C0B201 /* GeoTaggerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoTaggerAppDelegate.m; sourceTree = "<group>"; };
-		ABD0462717F513CD00C0B201 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ABD0462917F513CD00C0B201 /* GeoTaggerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoTaggerViewController.h; sourceTree = "<group>"; };
 		ABD0462A17F513CD00C0B201 /* GeoTaggerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoTaggerViewController.m; sourceTree = "<group>"; };
 		ABD0462C17F513CD00C0B201 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -190,8 +196,10 @@
 				ABD0469117F5244700C0B201 /* GTMapPoint.h */,
 				ABD0469217F5244700C0B201 /* GTMapPoint.m */,
 				ABD0462C17F513CD00C0B201 /* Images.xcassets */,
-				ABD0462617F513CD00C0B201 /* Main.storyboard */,
+				AB76CBEE1B069465005DE162 /* Main.storyboard */,
 				ABD0461B17F513CD00C0B201 /* Supporting Files */,
+				AB11FD871AE6F8D900F9DC10 /* GTFindPlaceViewController.h */,
+				AB11FD881AE6F8D900F9DC10 /* GTFindPlaceViewController.m */,
 			);
 			path = GeoTagger;
 			sourceTree = "<group>";
@@ -212,6 +220,8 @@
 				ABD0461D17F513CD00C0B201 /* InfoPlist.strings */,
 				ABD0462017F513CD00C0B201 /* main.m */,
 				ABD0462217F513CD00C0B201 /* GeoTagger-Prefix.pch */,
+				AB89EAA21B0547E3000AD095 /* PlaceCandidate.h */,
+				AB89EAA31B0547E3000AD095 /* PlaceCandidate.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -283,7 +293,7 @@
 				ORGANIZATIONNAME = msk;
 				TargetAttributes = {
 					ABD0461017F513CD00C0B201 = {
-						DevelopmentTeam = 7YYAD9366T;
+						DevelopmentTeam = XJELMFLM5V;
 					};
 					ABD0463117F513CD00C0B201 = {
 						TestTargetID = ABD0461017F513CD00C0B201;
@@ -317,7 +327,7 @@
 				ABD0462D17F513CD00C0B201 /* Images.xcassets in Resources */,
 				ABD0461F17F513CD00C0B201 /* InfoPlist.strings in Resources */,
 				ABF0E61B185004B700866D75 /* 4K_logo_app_icon.png in Resources */,
-				ABD0462817F513CD00C0B201 /* Main.storyboard in Resources */,
+				AB76CBF01B069465005DE162 /* Main.storyboard in Resources */,
 				AB054E17185020E100D0DB7D /* map-pin-7.png in Resources */,
 				AB054E15185020B800D0DB7D /* list-star-7.png in Resources */,
 			);
@@ -349,7 +359,9 @@
 				ABF7ECB0184D7FFB00499A9C /* Sync.m in Sources */,
 				ABD0469317F5244700C0B201 /* GTMapPoint.m in Sources */,
 				ABA8BCB517FB68FE00245158 /* GTDataManager.m in Sources */,
+				AB11FD891AE6F8D900F9DC10 /* GTFindPlaceViewController.m in Sources */,
 				AB597A0617F6326B00970F95 /* GTFormViewController.m in Sources */,
+				AB89EAA41B0547E3000AD095 /* PlaceCandidate.m in Sources */,
 				ABEF592E183EE8C800EA2170 /* GTSettings.m in Sources */,
 				ABD0462117F513CD00C0B201 /* main.m in Sources */,
 			);
@@ -374,20 +386,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		AB76CBEE1B069465005DE162 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB76CBEF1B069465005DE162 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		ABD0461D17F513CD00C0B201 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				ABD0461E17F513CD00C0B201 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		ABD0462617F513CD00C0B201 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ABD0462717F513CD00C0B201 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		ABD0463C17F513CD00C0B201 /* InfoPlist.strings */ = {
@@ -433,8 +445,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "1e071722-1aad-441b-8175-1db212d4479c";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -455,7 +468,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -465,7 +478,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PROVISIONING_PROFILE = "1e071722-1aad-441b-8175-1db212d4479c";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -476,12 +490,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoTagger/GeoTagger-Prefix.pch";
 				INFOPLIST_FILE = "GeoTagger/GeoTagger-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -494,12 +508,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoTagger/GeoTagger-Prefix.pch";
 				INFOPLIST_FILE = "GeoTagger/GeoTagger-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

@@ -9,6 +9,7 @@
 #import "GTDataManager.h"
 #import "GTSettings.h"
 #import "Location.h"
+#import "PlaceCandidate.h"
 
 /*
  GTDataManager contains all the common methods used to read/write data to local and remote storage.
@@ -275,6 +276,82 @@ static const int timeoutSeconds = 7;
     return [responseCode statusCode];
 
 }
+
+
+- (NSMutableArray *)getPlaceCandidateListWithPlaceName:(NSString *)placeName
+                                           countryName:(NSString *)countryName
+{
+    /*
+    Call a remote mobile server to get place candidates related with user's input.
+    User's input has place name (city name, town name) and country name.
+    */
+    
+    NSLog(@"Factual query...");
+    
+    NSMutableArray *results;
+    
+    // Create request
+    GTSettings *settings = [GTSettings getInstance];
+    //NSURL *url = [NSURL URLWithString:[settings hostURL]];
+    //NSURL *url = [NSURL URLWithString:@"http://127.0.0.1:5000/proxy/q?place=redlands&country=US"];
+    NSURL *url = [NSURL URLWithString:@"http://127.0.0.1:5000/proxy/q"];
+    
+    // TODO: This is a temporary setting to by-pass uncertified SSL. UPDATE THIS PART
+    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setTimeoutInterval:timeoutSeconds];
+    
+    // Set headers
+    NSMutableDictionary * headers = [[NSMutableDictionary alloc] init];
+    /*
+    NSString *appkeyStr = [NSString stringWithFormat:@"ApiKey %@:%@", settings.username, settings.appkey];
+    [headers setObject:appkeyStr forKey:@"Authorization"];
+    [headers setObject:@"application/json" forKey:@"Accept"];
+    [headers setObject:@"application/json" forKey:@"Content-Type"];
+    */
+    [request setAllHTTPHeaderFields:headers];
+    
+    request.HTTPMethod = @"POST";
+    NSString *postString = [NSString stringWithFormat:@"place=%@&country=%@", placeName, countryName];
+    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSLog(@"Request String: %@", postString);
+    
+    NSHTTPURLResponse *responseCode = nil;
+    NSError *error = nil;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+    
+    NSDictionary *resultsDic = [NSJSONSerialization JSONObjectWithData:responseData
+                                                               options:NSJSONReadingMutableContainers
+                                                                 error:nil];
+    
+    NSArray *target = (NSArray *)[resultsDic objectForKey:@"data"];
+    results = [[NSMutableArray alloc]init];
+    
+    for (id item in target)
+    {
+        // Create an data object
+        PlaceCandidate *pcandidate = [[PlaceCandidate alloc]init];
+        [pcandidate setContextname:[item objectForKey:@"contextname"]];
+        [pcandidate setLatitude:[item objectForKey:@"latitude"]];
+        [pcandidate setLongitude:[item objectForKey:@"longitude"]];
+        [pcandidate setFactualId:[item objectForKey:@"fact_id"]];
+        [results addObject:pcandidate];
+        NSLog(@"selected coordinate: %@, %@", pcandidate.latitude, pcandidate.longitude);
+    }
+    
+
+    // For Debugging
+    //NSLog(@"json data is: %@", jsonStr);
+    //NSLog(@"syncing location status code is: %d", [responseCode statusCode]);
+    //NSLog(@"Can't sync with a server! %@ %@", error, [error localizedDescription]);
+    
+
+    return results;
+}
+
 
 
 # pragma Helper methods

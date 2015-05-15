@@ -32,6 +32,10 @@
 
 - (NSString *)convertToJsonFromObject:(NSManagedObject *)obj;
 
+- (NSMutableArray *)getPlaceCandidateListWithPlaceName:(NSString *)placeName
+                                           countryName:(NSString *)countryName;
+
+
 @end
 
 // TODO: Update this part later.
