@@ -26,7 +26,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    // TODO: Delete
+    NSLog(@"The current location in FormViewController (latitude, longitude): %f, %f",
+          self.location.coordinate.latitude, self.location.coordinate.longitude );
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
