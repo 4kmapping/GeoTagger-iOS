@@ -27,9 +27,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //NSLog(@"called view will appear" );
     [self viewDidLoad];
-    
 }
 
 
@@ -79,8 +77,6 @@
         {
             // If a user is using GPS
             [worldView setShowsUserLocation:YES];
-            
-
         }
         else // If a user selected a place of interest without using GPS
         {
@@ -91,11 +87,14 @@
             coord.latitude = [[self.selectedPlace latitude] doubleValue];
             coord.longitude = [[self.selectedPlace longitude] doubleValue];
             annotation.coordinate = coord;
-            NSLog(@"selected coordinate: %d, %d", coord.latitude, coord.longitude);
-            
+            NSLog(@"selected coordinate: %f, %f", coord.latitude, coord.longitude);
+            // Add annotation
             [worldView setShowsUserLocation:NO];
             [worldView addAnnotation:annotation];
-
+            // Set a region to zoom (or pan) into the selected place
+            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coord, 50000,50000);
+            [worldView setRegion:region animated:TRUE];
+            [worldView regionThatFits:region];
         }
 
         // If no UserLocationMap exists in subview array, put it back to display the map view.
@@ -104,11 +103,8 @@
             [self.view addSubview:worldView];
             [self setRemovedUserMapView:NULL];
         }
-
         
     }
-    
-    
     
 }
 
@@ -132,8 +128,6 @@
         if(IS_OS_8_OR_LATER)
         {
             [locationManager requestWhenInUseAuthorization];
-            
-            
         }
         
         [locationManager setDelegate:self];
@@ -149,7 +143,7 @@
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
 {
-    NSLog(@"%@", newLocation);
+    NSLog(@"new location: %@", newLocation);
     [locationManager stopUpdatingLocation];
     [activityIndicator stopAnimating];
 
@@ -209,9 +203,8 @@
     
     CLLocationCoordinate2D loc = [[userLocation location] coordinate];
     // Using a MapKit function
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(loc, 3000,3000);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(loc, 50000,50000);
     [worldView setRegion:region animated:YES];
-    
     
 }
 
@@ -219,7 +212,6 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self findLocation];
-    
     [textField resignFirstResponder];
     
     return YES;
@@ -313,17 +305,29 @@
         // ***
         // Get current location and send it with segue
         GTFormViewController *formController = [segue destinationViewController];
-
-        // Register location into destination view controller
-        CLLocation *currLoc = [locationManager location];
         
-        // Initialize for an initial map view.
-        if (!currLoc)
+        CLLocation *selectedLoc;
+        
+        if(self.selectedPlace == nil)
         {
-            currLoc = [[CLLocation alloc] initWithLatitude:20.22 longitude:120.33];
+            // Register location into destination view controller
+            selectedLoc = [locationManager location];
+        }
+        else
+        {
+            NSLog(@"Using a user's selected place, not GPS.");
+            selectedLoc = [[CLLocation alloc] initWithLatitude:[[self.selectedPlace latitude] doubleValue]
+                                                     longitude:[[self.selectedPlace longitude] doubleValue] ];
         }
         
-        [formController setLocation:currLoc];
+        // Initialize for an initial map view. If currLoc is empty, set a default location
+        // TODO: Handle this issue, like trying to get the current location or getting input from a user.
+        if (!selectedLoc)
+        {
+            selectedLoc = [[CLLocation alloc] initWithLatitude:20.22 longitude:120.33];
+        }
+        
+        [formController setLocation:selectedLoc];
         
         // Set conditions for a form.
         // For new data recording, Edit mode should be True and dataToDisplay should be none
